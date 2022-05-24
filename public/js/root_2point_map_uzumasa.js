@@ -43,13 +43,13 @@ directionsService.route({
     });
 
     /*情報ウィンドウを作成。*/
-    var infoContent2 = '<h5>虚無蔵祇園店</h5><p>10～19時まで営業<br>京都府京都市東山区祇園町北側625<br>tel 075-561-6155</p>';
+    var infoContent2 = '<h5>虚無蔵太秦店</h5><p>10～19時まで営業<br>京都府京都市右京区太秦東峰岡町10<br>tel 075-862-5003</p>';
 
     var infowindow = new google.maps.InfoWindow({
 	content: infoContent2
     });
 
-    //*情報ウィンドウを表示します。 */
+    //*情報ウィンドウを表示します。 *
     google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map,marker);
     });
