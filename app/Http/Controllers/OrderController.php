@@ -93,7 +93,7 @@ class OrderController extends Controller
         return redirect('shop/purchase'); //再度、purchase.bladeに戻り、２種類商品が注文できるように同じ画面にリダイレクト/「注文を確定」でようやくconfirmへ
 
         }
-     } // END ID
+     } // END IF
 
     }
 
