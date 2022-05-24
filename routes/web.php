@@ -144,7 +144,7 @@ Route::get('shop/store_uzumasa_1', 'App\Http\Controllers\OrderController@GoogleM
 Route::get('shop/store_gion_1', 'App\Http\Controllers\OrderController@GoogleMapLocation2')->name('gion');
 // 太秦店の地図を表示します。
 Route::get('/shop/store_uzumasa', function () {
-  return view('shop.stores');
+  return view('shop.store_uzumasa');
 });  
 // 祇園店の地図を表示します。
 Route::get('/shop/store_gion', function () {

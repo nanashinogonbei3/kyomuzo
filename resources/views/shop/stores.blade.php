@@ -8,8 +8,10 @@
             <div class="card">
                   <div class="card-body">
 
+         
                     <form action="{{ route('uzumasa') }}" method="get">
-                       @foreach ($shop1LatLng as $v)
+                     
+                    @foreach ($shop1LatLng as $v)
                         <!-- lat用 -->
                         <input type="hidden" name="latitude" value="{{ $v->latitude }}">
                         <!-- lng用 -->
@@ -18,7 +20,7 @@
                         <p class="card-text">京都府京都市右京区太秦西蜂岡町９</p>
                         <p>10時～20時 TEL 075-862-5003</p>
                       
-                       @endforeach
+                        @endforeach   
                        <!-- buttom -->
                        <button type="submit" name="button-submit" class="btn btn-success">Google Map</button>
                    </form>

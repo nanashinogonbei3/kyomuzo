@@ -488,6 +488,7 @@ class OrderController extends Controller
 
 
 
+
         //店舗の緯度経度を取得後、shop/stores.bladeで緯度経度をhiddenでフォーム送信します。
         public function shopLocation()
         {
@@ -500,7 +501,7 @@ class OrderController extends Controller
                 ->get();
 
             $shop1LatLng = $shop1_latlng->toArray();
-      
+
             //店舗のid=2の緯度経度をDBから取出します。
             //受取ったid＝2の緯度経度情報をブレードからhiddenでformで送ります。
             $shop2_latlng = DB::table('shops') //店舗ID=2 の緯度経度を取り出します。
@@ -509,7 +510,7 @@ class OrderController extends Controller
             ->get();
 
             $shop2LatLng = $shop2_latlng->toArray();
-                 
+          
             return view('shop.stores', compact('shop1LatLng', 'shop2LatLng'));  
         }
 
@@ -527,7 +528,7 @@ class OrderController extends Controller
         } else {
         
             $lat = $request->latitude;
-         
+       
             $lng = $request->longitude;
         
             // currentLocationで表示

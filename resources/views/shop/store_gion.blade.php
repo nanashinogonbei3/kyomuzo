@@ -17,6 +17,7 @@
   <body onload="initialize()">
    <p>京都祇園店</p>
 
+   <!-- 地図を表示する -->
    <div id="map_canvas" style="width:720px; height: 500px"></div>
    <div id="route" style="width: 720px; height: 50px;"></div>
 

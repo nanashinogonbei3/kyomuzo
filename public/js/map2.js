@@ -19,7 +19,13 @@ function initialize() {
   // 八坂神社の緯度経度にマーカーを置く
   var m_latlng2 = new google.maps.LatLng(35.003831624746006, 135.7785104890609);
   marker2 = new google.maps.Marker({
-    position: m_latlng2
+    position: m_latlng2,
+    map: map, //マーカーを立てる地図を指定
+    title: '虚無蔵祇祇園店',// アイコンにマウスホバーすると出てくる文言
+    icon: {
+        url: '../assets/img/marker.png',// お好みの画像までのパスを指定
+        scaledSize: new google.maps.Size(105, 95) //
+      }   
   });
 }
 

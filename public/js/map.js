@@ -16,10 +16,16 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map_canvas"), opts);
 
   // 東映太秦映画村の緯度経度にマーカーを置く
-  // var m_latlng = new google.maps.LatLng(35.016664493725315, 135.70789474534644);
   var m_latlng = new google.maps.LatLng(35.016664493725315, 135.70789474534644);
   marker = new google.maps.Marker({
-    position: m_latlng
+    position: m_latlng,
+    map: map, //マーカーを立てる地図を指定
+    title: '虚無蔵祇祇園店',// アイコンにマウスホバーすると出てくる文言
+    icon: {
+        url: '../assets/img/marker.png',// お好みの画像までのパスを指定
+        scaledSize: new google.maps.Size(105, 95) //
+      }   
+
   });
   // GoogleMapper.addColorMarker(34.7, 135.5, "大阪", "FF0", "000", "虎");
 }
