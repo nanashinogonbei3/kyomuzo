@@ -248,6 +248,9 @@ class StockController extends Controller
 
 
         return view('stock.search_stock_control', $param);
+
+      } else {
+          return redirect('stock/stock_list'); //$request->idを取得できず、直接.search_stock_control画面に訪問した時リダイレクトします。
       }
     }
     
@@ -566,6 +569,8 @@ class StockController extends Controller
 
         return view('stock.search_stock', compact('parameter', 'stocks', 'productName_List', 'shopName_List', 'input'));
 
+        } else {
+          return redirect('stock/stock_list'); //$request->idを取得できず、直接.search_stock_control画面に訪問した時リダイレクトします。
         }
     }
 

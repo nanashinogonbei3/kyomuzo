@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Member;
 use Illuminate\Support\Facades\Auth;
-// 追加
-use Illuminate\Support\Facades\DB;
 // パスワードをHash化
 use Illuminate\Support\Facades\Hash;
 
@@ -24,24 +22,6 @@ class MemberController extends Controller
         ini_set("max_execution_time", 0); 
         // パース時間を設定しない
         ini_set("max_input_time", 0); 
-        // $data = ['msg'=>'これはコントローラから渡されたメッセージです。'];
-        // return view('product.test2', $data);
-
-        // $members = Member::orderBy('desc')
-        // ->Paginate(2);
-        // dd($members);
-        // return view('product.test2', compact('members'));
-
-
-        // DBファサード編 これならOK
-        // $members = DB::table('members')->get();
-
-     
-
-        // DBファサード編 これはブレードに$members を渡せていない。
-        // $members = DB::table('members')->get();
-        // return view('product.test2',['members' => $members]);
-    
 
         // クエリビルダ編 dd が効く
         $members = Member::orderBy('id', 'asc')
@@ -195,11 +175,6 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        // タイムアウトしない
-        ini_set("max_execution_time", 0); 
-        // パース時間を設定しない
-        ini_set("max_input_time", 0); 
         //
     }
 
@@ -213,7 +188,6 @@ class MemberController extends Controller
     {
         //
     }
-
 
 
     // パスワードにHash(暗号化)するために全カラム
@@ -271,7 +245,5 @@ class MemberController extends Controller
         return redirect()->route('orderconfirm');
             
     }
-
-
 
 }

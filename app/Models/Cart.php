@@ -15,8 +15,8 @@ class Cart extends Model
         'member_id',
     ];
 
-        // カートはMemberクラスに所属
-        public function member()
+    // カートはMemberクラスに所属
+    public function member()
     {
         return $this->belongTo(Member::class);
     }
@@ -26,7 +26,5 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class);
     }
-
-
 
 }

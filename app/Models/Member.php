@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Member_product;
 
 class Member extends Authenticatable
 {
@@ -46,13 +45,12 @@ class Member extends Authenticatable
         }
 
         // Cartモデルとの一対多のリレーション
+        // Eloquentは親モデル（Memberモデル）の「スネークケース」名に「_id」という接尾辞を付けます。
+        // したがって、この例では、EloquentoはCartモデルの外部キーカラムが「member_id」であると想定します。       
         public function carts()
         {
             return $this->hasMany(Cart::class);
         }
         
-        // Eloquentは親モデル（Memberモデル）の「スネークケース」名に「_id」という接尾辞を付けます。
-        // したがって、この例では、EloquentoはCartモデルの外部キーカラムが「member_id」であると想定します。
-    
-       
+     
 }

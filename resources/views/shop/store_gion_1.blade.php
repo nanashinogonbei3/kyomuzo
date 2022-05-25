@@ -19,16 +19,16 @@
   <body onload="initialize()">
    <p>京都祇園店</p>
    <div>
-     <a class="nav-link" href="{{ url('/shop/root_result') }}">アクセス</a>
+     <a class="nav-link" href="{{ url('/shop/root_result') }}"><h5><dt>アクセス</dt></h5></a>
    </div>
 
    <div id="map" style="width:700px; height: 500px"></div>
 
 <script>
 
-// currentLocation.jsで使用する定数latに、controllerで定義した$latをいれて、currentLocation.jsに渡す
+// js/storesLocation.jsで使用する定数に、controllerでDBから取り出した緯度を$latに格納し、、js/storesLocation.jsに渡す
 const lat = "{{ $lat }}";
-// currentLocation.jsで使用する定数lngに、controllerで定義した$lngをいれて、currentLocation.jsに渡す
+// js/storesLocation.jsで使用する定数に、controllerでDBから取り出した経度を$lngに格納し、、js/storesLocation.jsに渡す
 const lng = "{{ $lng }}";
 
 </script>

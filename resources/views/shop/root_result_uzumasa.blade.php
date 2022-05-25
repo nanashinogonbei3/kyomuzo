@@ -33,11 +33,12 @@ p {line-height:180%}
 
 </head>
 
-     <!-- 入力した住所から緯度経度に変換します。 -->
+<!-- 入力した住所から緯度経度に変換します。 -->
 <div>   
-<input type="text" id="addressInput" placeholder="住所を入力してください">
+出発地点：<input type="text" id="addressInput" placeholder="京都駅">
 
-<button id="searchGeo" class="btn btn-success">&nbsp;&nbsp;&nbsp;緯度経度変換</button>
+<button id="searchGeo" class="btn btn-success">&nbsp;緯度経度変換</button>
+<a href="{{ url('shop/stores') }}"><button type="button" class="btn btn-outline-warning">戻る</button></a>
 
 <pre></pre><pre></pre>
  <form action="{{ route('rootResult2') }}" method="get">
@@ -50,7 +51,7 @@ p {line-height:180%}
 </div>
 <pre></pre>
 
-<div class="head-title">Google Maps APIのルート案内。</div>
+<div class="head-title">Google Maps APIのルート案内</div>
 
 
 <!-- 地図が表示されるDIV -->
@@ -61,9 +62,9 @@ p {line-height:180%}
 
 <!-- 入力した住所の緯度経度を変数に格納します。 -->
 <script>
-// currentLocation.jsで使用する定数latに、controllerで定義した$latをいれて、currentLocation.jsに渡す
+// root_2point_map_uzumasa.jsで使用する定数latに、controllerで定義した$latをいれて、root_2point_map_uzumasa.jsに渡す
 const lat = "{{ $lat }}";
-// currentLocation.jsで使用する定数lngに、controllerで定義した$lngをいれて、currentLocation.jsに渡す
+// root_2point_map_uzumasa.jsで使用する定数lngに、controllerで定義した$lngをいれて、root_2point_map_uzumasa.jsに渡す
 const lng = "{{ $lng }}";
 </script>
 
@@ -79,9 +80,6 @@ const lng = "{{ $lng }}";
   <!-- 入力した住所から緯度経度を出力します。 -->
   <script src="{{ asset('/js/getLatLng.js') }}"></script>
   
-  <p>
-    距離：<span id="iddistance">(計測前)</span>、時間：<span id="idtime">(計測前)</span>
-    </p>
 
 
 </html>

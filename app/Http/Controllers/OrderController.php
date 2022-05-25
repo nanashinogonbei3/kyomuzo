@@ -143,9 +143,6 @@ class OrderController extends Controller
     
         $form['member_id'] = $cart->member_id; //現在ログイン中のメンバーidを$formの連想配列に加える。
 
-        $productID1 = 1; //product_id 商品ID=1 を代入
-        $productID2 = 2; //product_id 商品ID=2 を代入
-
         foreach ($carts as $key => $v) { 
             
             if (empty($request->id)) { // リクエストに$request->idが無い場合は、新規レコードをインサートします。
@@ -443,8 +440,6 @@ class OrderController extends Controller
         }
 
 
- 
-                
                 Cart::query()->delete(); // Eloquentでレコードを全件削除する
   
                                     
@@ -493,83 +488,78 @@ class OrderController extends Controller
         public function shopLocation()
         {
 
-            //店舗のid=1の緯度経度をDBから取出します。
-            //受取ったid＝1の緯度経度情報をブレードからhiddenでformで送ります。
-            $shop1_latlng = DB::table('shops') //店舗ID=1 の緯度経度を取出します。
+            return view('shop.stores'); //太秦店、祇園店のGooglemap
+           
+        }
+
+        public function GoogleMapLocation(Request $request)
+        {
+            //受取ったrequest->id が店舗のIDで、どちらの店舗を表示するか切り分けます。
+            //店舗のIDによってDBの緯度経度を切り分けて取得します。
+
+        if ($request->id == 1) {//$request->idが1なら太秦店の地図を表示させる処理を実行します。   
+
+          if (!empty($request->id)) {
+            if ($request->id == 1) {//太秦店の緯度経度をDBから取得します。
+                $shop1_latlng = DB::table('shops') //店舗ID=1 の緯度経度を取出します。
                 ->select('shops.latitude', 'shops.longitude')
-                ->where('shops.id','=', 1)
-                ->get();
+                ->where('shops.id','=', $request->id)
+                ->get(); 
+            } 
 
             $shop1LatLng = $shop1_latlng->toArray();
 
-            //店舗のid=2の緯度経度をDBから取出します。
-            //受取ったid＝2の緯度経度情報をブレードからhiddenでformで送ります。
-            $shop2_latlng = DB::table('shops') //店舗ID=2 の緯度経度を取り出します。
-            ->select('shops.latitude', 'shops.longitude')
-            ->where('shops.id','=', 2)
-            ->get();
-
-            $shop2LatLng = $shop2_latlng->toArray();
-          
-            return view('shop.stores', compact('shop1LatLng', 'shop2LatLng'));  
-        }
-
-
-
-        public function GoogleMapLocation1(Request $request)
-        {
-            //京都太秦店の地図を表示します。
-
-            //shop.sotres.blade.から送られた緯度経度をこのメソッドでリクエストで受け取ります。
-            //store_uzumasa_1.bladeへ太秦店の地図を表示します。
-           
-        if (empty($request)) {
-            return redirect('shop/stores');//もし$requestのリクエストが無くstore_uzumasa_1に直接来たら、stres.blade.リダイレクトします。
-        } else {
-        
-            $lat = $request->latitude;
-       
-            $lng = $request->longitude;
-        
-            // currentLocationで表示
-            return view('shop/store_uzumasa_1', 
-                // 現在地緯度latをbladeへ渡す
-                [
-                    // 現在地緯度latをbladeへ渡す
-                    'lat' => $lat,
-                    // 現在地経度lngをbladeへ渡す
-                    'lng' => $lng,
-                ]);
+            foreach ($shop1LatLng as $v) {
+                        $lat = $v->latitude;
+                        $lng = $v->longitude;
             }
-        }
-
-
-        public function GoogleMapLocation2(Request $request)
-        {
-            //京都太秦店の地図を表示します。
-
-            //shop.sotres.blade.から送られた緯度経度をこのメソッドでリクエストで受け取ります。
-            //store_gion_1.bladeへ祇園店の地図を表示します。
-
-        if (empty($request)) {
-            return redirect('shop/stores');//もし$requestのリクエストが無くstore_uzumasa_1に直接来たら、stres.blade.リダイレクトします。
-        } else {   
-        
-            $lat = $request->latitude;
-        
-            $lng = $request->longitude;
-        
-            // currentLocationで表示
-            return view('shop/store_gion_1', 
-                // 現在地緯度latをbladeへ渡す
-                [
-                    // 現在地緯度latをbladeへ渡す
-                    'lat' => $lat,
-                    // 現在地経度lngをbladeへ渡す
-                    'lng' => $lng,
+  
+            return view('shop/store_uzumasa_1', //太秦店の緯度経度から地図を表示します。
+               
+                [         
+                    'lat' => $lat,// 緯度latをbladeへ渡す
+                    
+                    'lng' => $lng,// 経度lngをbladeへ渡す
                 ]);
+
+            } else {
+                return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
             }
+
+        } elseif ($request->id == 2) {//$request->idが2なら太秦店の地図を表示させる処理を実行します。
+
+            if (!empty($request->id)) {
+                if ($request->id == 2) {//祇園店の緯度経度をDBから取得します。
+                    $shop2_latlng = DB::table('shops') //店舗ID=1 の緯度経度を取出します。
+                    ->select('shops.latitude', 'shops.longitude')
+                    ->where('shops.id','=', $request->id)
+                    ->get(); 
+                } 
+   
+                $shop2LatLng = $shop2_latlng->toArray();
+    
+                foreach ($shop2LatLng as $v) {
+                            $lat = $v->latitude;
+                            $lng = $v->longitude;
+                }
+      
+                return view('shop/store_gion_1',//祇園店の緯度経度から地図を表示します。
+                    
+                    [
+                        
+                        'lat' => $lat,// 緯度latをbladeへ渡す
+                        
+                        'lng' => $lng,// 経度lngをbladeへ渡す
+                    ]);
+    
+                } else {
+                    return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
+                }
+        }    
+
         }
+
+
 
 
         public function rootResult(Request $request)

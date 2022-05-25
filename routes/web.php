@@ -138,11 +138,8 @@ Route::post('shop/thanks', 'App\Http\Controllers\OrderController@thanks')->name(
 Route::get('shop/thanks', 'App\Http\Controllers\OrderController@closeThanks');
 // 店舗のGoogle Map API で地図を表示します。
 Route::get('shop/stores', 'App\Http\Controllers\OrderController@shopLocation');
-//店舗のリンクから、「京都太秦店」のボタンを選択すると、京都太秦店の地図を表示します。
-Route::get('shop/store_uzumasa_1', 'App\Http\Controllers\OrderController@GoogleMapLocation1')->name('uzumasa');
-//店舗のリンクから、「京都祇園店」のボタンを選択すると、京都祇園店の地図を表示します。
-Route::get('shop/store_gion_1', 'App\Http\Controllers\OrderController@GoogleMapLocation2')->name('gion');
-// 太秦店の地図を表示します。
+
+// // 太秦店の地図を表示します。
 Route::get('/shop/store_uzumasa', function () {
   return view('shop.store_uzumasa');
 });  
@@ -157,6 +154,14 @@ Route::get('shop/currentLocation/', 'App\Http\Controllers\OrderController@curren
 Route::get('shop/findLocation', function () {
   return view('shop.findLocation');
 });
+//太秦店の地図を表示します。
+Route::post('shop/store_uzumasa_1', 'App\Http\Controllers\OrderController@GoogleMapLocation')->name('uzumasa');
+Route::get('shop/store_uzumasa_1', 'App\Http\Controllers\OrderController@GooglemapLocation');
+
+//祇園の地図を表示します。
+Route::post('shop/store_gion_1', 'App\Http\Controllers\OrderController@GoogleMapLocation')->name('gion');
+Route::get('shop/store_gion_1', 'App\Http\Controllers\OrderController@GoogleMapLocation');
+
 //緯度経度を取得して祇園店までのルート・マップを表示します。
 Route::get('shop/root_result', 'App\Http\Controllers\OrderController@rootResult')->name('rootResult');
 //緯度経度を取得して太秦店までのルート・マップを表示します。
@@ -164,8 +169,6 @@ Route::get('shop/root_result_uzumasa', 'App\Http\Controllers\OrderController@roo
 
 
 // **For Page custom テスト表示用 ************************************
-
-
 
 // *****************************************************
      

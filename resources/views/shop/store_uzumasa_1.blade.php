@@ -1,8 +1,6 @@
 @extends('layouts.store')
 
 
-
-
 @section('content1')
 <!-- この中に地図を表示します・太秦店 -->
 <div class="card mb-3">
@@ -19,15 +17,16 @@
   <body onload="initialize()">
    <p>京都太秦店</p>
    <div>
-     <a class="nav-link" href="{{ url('/shop/root_result_uzumasa') }}">アクセス</a>
+     <a class="nav-link" href="{{ url('/shop/root_result_uzumasa') }}"><h5><dt>アクセス</dt></h5></a>
    </div>
    <div id="map" style="width:720px; height: 500px"></div>
 
 <script>
 
-// currentLocation.jsで使用する定数latに、controllerで定義した$latをいれて、currentLocation.jsに渡す
+// js/storesLocation.jsで使用する定数に、controllerでDBから取り出した緯度を$latに格納し、js/storesLocation.jsに渡す
 const lat = "{{ $lat }}";
-// currentLocation.jsで使用する定数lngに、controllerで定義した$lngをいれて、currentLocation.jsに渡す
+
+// js/storesLocation.jsで使用する定数に、controllerでDBから取り出した経度を$lngに格納し、js/storesLocation.jsに渡す
 const lng = "{{ $lng }}";
 
 </script>
@@ -39,9 +38,7 @@ const lng = "{{ $lng }}";
   
    <script src="{{ asset('/js/storesLocation.js') }}"></script>
     
-  
 
- 
 </div>
 @endsection
 

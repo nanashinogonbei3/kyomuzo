@@ -15,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -85,8 +84,6 @@
                         <h2 class="section-heading mb-5">
                             <!-- 回転中 -->
                             <span class="section-heading-lower"></span>
-
-
                     </div>
                 </div>
             </div>
