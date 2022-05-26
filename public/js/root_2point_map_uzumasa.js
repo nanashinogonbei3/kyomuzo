@@ -37,7 +37,7 @@ directionsService.route({
         map: map, //マーカーを立てる地図を指定
         title: '虚無蔵太秦園店',// アイコンにマウスホバーすると出てくる文言
         icon: {
-            url: '../assets/img/marker.png',// お好みの画像までのパスを指定
+            url: '../assets/img/marker.png',// 画像のパスを指定
             scaledSize: new google.maps.Size(105, 95) //
           }   
     });

@@ -4,10 +4,7 @@ const max = 30;
 // JSON.parseとすることで、もとの配列の値に表示することができます。
 // const orderNum = JSON.parse(localStorage.getItem("todos"));
 
-
-
 let not = 1;
-
 // くろあん ******
       // ＋－ボタンを押すと注文数が増減する。くろあん(press-buttonA)
       function count_upA() {
@@ -19,10 +16,8 @@ let not = 1;
             console.log(not);
             //<input type="number" ・・省略・・id="press-buttonA">の数字をnotの値に書き換える
             document.getElementById("press-buttonA").value = not;
-            }
-         
+            }   
       }
-
       // －ボタンを押すと1づつ数が減る
       function count_downA() {
            
@@ -33,9 +28,8 @@ let not = 1;
             document.getElementById("press-buttonA").value = not;
             }
       }
-
 let notB = 1;
-// しろあん *****
+// 黄みあん *****
       // ＋－ボタンを押すと注文数が増減する。くろあん(press-buttonB)
       function count_upB() {
             
@@ -46,10 +40,8 @@ let notB = 1;
             console.log(notB);
             //<input type="number" ・・省略・・id="press-buttonA">の数字をnotの値に書き換える
             document.getElementById("press-buttonB").value = notB;
-            }
-         
+            }    
       }
-
       // －ボタンを押すと1づつ数が減る
       function count_downB() {
            

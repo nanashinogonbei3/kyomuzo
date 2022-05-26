@@ -1,7 +1,6 @@
 var map;
 var marker;
 
-
 function initialize() {
   // 地図のだいたい中央の場所の公共施設の緯度経度を中心に設定する
   var latlng = new google.maps.LatLng(35.016664493725315 ,135.70789474534644);
@@ -22,12 +21,10 @@ function initialize() {
     map: map, //マーカーを立てる地図を指定
     title: '虚無蔵祇祇園店',// アイコンにマウスホバーすると出てくる文言
     icon: {
-        url: '../assets/img/marker.png',// お好みの画像までのパスを指定
+        url: '../assets/img/marker.png',// 画像のパスを指定
         scaledSize: new google.maps.Size(105, 95) //
       }   
-
   });
-  // GoogleMapper.addColorMarker(34.7, 135.5, "大阪", "FF0", "000", "虎");
 }
 
 var map;
@@ -42,7 +39,6 @@ function initMap() {
   const eigamura = {lat: 35.016008400452456, lng: 135.7039430668044};
 
 }
-
 // マーカーを表示する
 function doOpen() {
   marker.setMap(map);

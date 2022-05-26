@@ -38,8 +38,6 @@ function initMap() {
       document.getElementById('map_canvas'), options);
   // The markers for The kyoto-gosyo and The yasaka-jinjya
   const yasaka = {lat: 35.003831624746006, lng: 135.7785104890609};
-  
-
 }
 
 // マーカーを表示する

@@ -61,10 +61,3 @@ function getLatLng() {
   }
   $('#searchGeo').on('click', getLatLng);
 
-  //JavaScript
-// var textbox = document.getElementById("addressInput").value;
-// var textbox3 = document.getElementById("lng").value;
-
-
-
-// ***** END 緯度経度出力 *******************************
