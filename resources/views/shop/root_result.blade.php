@@ -2,19 +2,6 @@
 
 @section('content')
 <!-- この中に地図を表示します・太秦店 -->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Google Maps JavaScript API 2点間のルート案内</title>
-    <!-- CSS only -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
-      crossorigin="anonymous">
-    <style>
-    p {line-height:180%}
-    .head-title {width:100%;background:#87ceeb;color:#fff;text-indent:8px;font-weight:700;line-height:180%}
-    </style>
-</head>
 <div class="card mb-3">
 <!-- 入力した住所から緯度経度に変換します。 -->
   <div>   
@@ -31,7 +18,6 @@
   </form>
   </div>
   <pre></pre>
-
   <div class="head-title">Google Maps APIのルート案内</div>
   <!-- 地図が表示されるDIV -->
   <div id="map" style="width:100%;height:500px"></div>
@@ -53,9 +39,6 @@
   <!-- 入力した住所から緯度経度を出力します。 -->
   <script src="{{ asset('/js/getLatLng.js') }}"></script>
   </div>
-</body>
-</html>
- 
 @endsection
 
 

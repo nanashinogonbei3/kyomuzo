@@ -38,7 +38,7 @@
                             <button type="submit" class="btn btn-primary">ログイン</button>
                           </form>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>

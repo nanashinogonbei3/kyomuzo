@@ -2,7 +2,6 @@
 
 @section('content')
 <span class="section-heading-lower">ご登録の確認</span>
-
   <div class="container-md">
     <!-- mt-3 margin-top: 3 -->
     <div class="row mt-3">
@@ -113,5 +112,4 @@
       </div>
     </div>
   </div>
-
 @endsection

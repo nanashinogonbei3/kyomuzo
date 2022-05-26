@@ -77,5 +77,4 @@
             </div>
       <!-- div.container-md END -->
       </div>
-
 @endsection

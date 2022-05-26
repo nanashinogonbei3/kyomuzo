@@ -27,8 +27,7 @@
 <!-- card (オンライン・ショップ) -->
 <div class="card mb-3 p-0">
 <img src="../../../../assets/img/shirokuro.png" class="card-img-top" alt="虚無蔵(白あんくろあん）">
-   <div class="card-body">
-     
+   <div class="card-body">  
       <button type="button" class="btn btn-outline-success">【オンライン・ショップ】</button>
    </div>
 </div>

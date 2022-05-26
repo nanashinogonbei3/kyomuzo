@@ -159,12 +159,10 @@
                 <!-- リンク確認の仮設ボタン-後で削除する！ -->
                 <!-- <a href="{{ url('/shop/join_confirm') }}" class="btn btn-warning">(仮設)登録</a> -->
               </div>
-
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 @endsection

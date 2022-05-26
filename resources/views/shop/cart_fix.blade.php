@@ -3,8 +3,7 @@
 @section('content')
 <h3>ご注文</h3>
 <!-- px 横余白2 -->
-<main class="row mt-3 px-2">
-   
+<main class="row mt-3 px-2">  
 <div class="card">
   <div class="card-header">    
       <div class="card-body">

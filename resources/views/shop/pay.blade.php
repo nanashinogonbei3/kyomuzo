@@ -27,5 +27,4 @@
 <!-- END FORM --> 
 </form>
 <a href="{{ url('/shop/index') }}" class="btn btn-light">キャンセル</a>
-
 @endsection

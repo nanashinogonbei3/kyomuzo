@@ -1,11 +1,9 @@
 @extends('layouts.shop')
 
 @section('content')
-
 <h3>取扱い店舗一覧</h3>
 <!-- card  -->
 <img src="../../../../assets/img/kyomuzo.png" class="card-img-top" alt="...">
-
 <div class="card mb-3">
 <br><br>
   <div class="card-body">
@@ -38,7 +36,6 @@
    <hr>
    <br>
    </div>
-</div>
 <!-- card END -->
-
+</div>
 @endsection

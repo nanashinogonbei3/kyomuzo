@@ -11546,5 +11546,13 @@ div.form{
   outline: none;
   }
 
+  p {
+    line-height:180%
+  }
+  
+  .head-title {width:100%;background:#87ceeb;
+    color:#fff;text-indent:8px;font-weight:700;
+    line-height:180%
+  }
   /* map API css END */
 

@@ -64,5 +64,4 @@
    <!-- card END -->
    </div>
 </main>
-
 @endsection

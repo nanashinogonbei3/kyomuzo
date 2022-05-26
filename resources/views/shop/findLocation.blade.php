@@ -27,5 +27,4 @@
     <script src="{{ asset('/js/getLatLng.js') }}"></script>
     </body>
 </html>
-
 @endsection

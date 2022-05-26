@@ -38,6 +38,5 @@ class Shop extends Model
 
         return $getShopNameList;
     }
- 
-    
+   
 }

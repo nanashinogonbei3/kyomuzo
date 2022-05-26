@@ -1,7 +1,6 @@
 @extends('layouts.shop')
 
 @section('content')
-
 <h3>ご注文の確認</h3>
 <!-- px 横余白2 -->
 <main class="row mt-3 px-2">

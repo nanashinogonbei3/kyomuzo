@@ -48,7 +48,6 @@ class Stock extends Model
         return $this->belongsTo(Product::class);
     }
 
-
     //逆の関係の定義
     //ShopモデルからStockモデルへのアクセスができるようになりました。
     //次に、在庫の所有者である店舗へアクセスできるようにする、Stockモデルの

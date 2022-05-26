@@ -1,8 +1,7 @@
 @extends('layouts.shop')
 
 @section('content')
-<main class="row mt-3 px-2">
-     
+<main class="row mt-3 px-2">   
       <!-- card （黄みあん）-->
       <div class="card mb-3">
             <img src="../../../assets/img/gozasoro.png" class="card-img-top" alt="虚無蔵(白あん)">
@@ -24,7 +23,7 @@
       </div>
       <!-- card END -->
       <div class="mb-3">
-            <a href="{{ url('shop/orders') }}" class="btn btn-success">取り扱い店舗一覧</a>
+        <a href="{{ url('shop/orders') }}" class="btn btn-success">取り扱い店舗一覧</a>
       </div>
 </main>
 @endsection
