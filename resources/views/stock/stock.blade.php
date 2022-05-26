@@ -2,7 +2,6 @@
 
 @section('content')
 <span class="section-heading-lower">製造商品登録</span>
-
   <div class="container-md">
     <!-- mt-3 margin-top: 3; -->
     <div class="row mt-3">
@@ -27,7 +26,6 @@
                         <br>
                         @endforeach
                         @endif
-
                         <!-- 商品ID(商品名)選択 -->
                         <select id="inputProductId" name="product_id" class="form-control @error('product_id') is-invalid @enderror" value="{{ old('product_id') }}">
                         @foreach($product_list as $id => $product_name)
@@ -37,13 +35,9 @@
                         <!-- product_id(product_name) END -->
                   </div>
               </div>
-             
-
               <!-- 店舗ID -->
               <div class="row mb-3">
-
                 <label for="inputShop" class="col-sm-2 col-form-label">店舗名&nbsp;<span class="badge bg-danger">必須</span></label>
-
                   <div class="col-sm-4">
                         @if ($errors->has('shop_id'))
                         @foreach($errors->get('shop_id') as $message)
@@ -51,7 +45,6 @@
                         <br>
                         @endforeach
                         @endif
-
                         <!-- 店舗選択 -->
                         <select id="inputShop" name="shop_id" class="form-control @error('shop_id') is-invalid @enderror" value="{{ old('shop_id') }}">
                         @foreach($shop_list as $id => $shop_name)
@@ -61,16 +54,12 @@
                         <!-- shop END -->
                   </div>
               </div>
-
                <!-- 数量 -->
                <div class="row mb-3">
-
                   <label for="inputStockQty" class="col-sm-2 col-form-label">数量&nbsp;<span class="badge bg-danger">必須</span></label>
-
-
                   <div class="col-sm-2">
                         <input type="text" name="stock_quantity" id="inputStockQty" class="form-control 
-                                          @error('stock_quantity') is-invalid @enderror " value="{{ old('stock_quantity') }}" aria-describedby="validateExpirationDate">
+                        @error('stock_quantity') is-invalid @enderror " value="{{ old('stock_quantity') }}" aria-describedby="validateExpirationDate">
                         @error('stock_quantity')
                         <div id="validateExpirationDate" class="invalid-feedback">
                         {{ $message }}
@@ -78,27 +67,20 @@
                         @enderror
                   </div>
               </div>
-
               <!-- 製造年月日 -->
               <div class="row mb-3">
-
                 <label for="inputProductionDate" class="col-sm-2 col-form-label">製造年月日&nbsp;<span class="badge bg-danger">必須</span></label>
-
                 <div class="col-sm-3">
-
                    @if ($errors->has('production_date'))
                       @foreach($errors->get('production_date') as $message)
                       <span class="text-danger">{{ $message }}</span>
                       <br>
                       @endforeach
                   @endif
-
                   <input type="date" name="production_date" id="inputProductionDate" class="form-control
-                                    @error('production_date') is-invalid @enderror " value="{{ old('production_date') }}" aria-describedby="validateExpirationDate">
-                 
+                   @error('production_date') is-invalid @enderror " value="{{ old('production_date') }}" aria-describedby="validateExpirationDate">
                 </div>
               </div>
-
               <button type="submit" class="btn btn-primary">登録</button>
             </form>
           <!-- div.card-body END -->

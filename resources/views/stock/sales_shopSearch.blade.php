@@ -2,7 +2,6 @@
 
 @section('content')
 <h2 class="section-heading-lower">店舗販売履歴</h2>
-
 <!-- Navibar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -31,7 +30,6 @@
             @endforeach
           </ul>
         </li>
-     
         <form action="{{ route('sales_randomSerch') }}" method="get" class="d-flex">
         @csrf
           <input type="text" name="input" value="{{$input}}" class="form-control me-2"  placeholder="Search" aria-label="Search">
@@ -42,7 +40,6 @@
   </div>
 <!-- END Navibar -->
 </nav>
-
 <div class="container-md">
       <div class="row mt-3">
          <table class="table table-success table-striped">  
@@ -58,7 +55,6 @@
                   <th></th>
                </tr>
             </thead>
-
             <tbody>
             @foreach ($items as $key => $v)
               <tr>
@@ -79,4 +75,5 @@
         {{ $items->links(); }}
       </div>
 </div>
+
 @endsection

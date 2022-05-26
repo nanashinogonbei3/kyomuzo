@@ -2,17 +2,14 @@
 
 @section('content')
 <h2 class="section-heading-lower">製造商品管理画面</h2>
-
 <!-- Navibar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/stock/stock') }}">製造商品登録</a>
         </li>
@@ -31,7 +28,6 @@
             @endforeach
           </ul>
         </li>
-
         <li class="nav-item">
           <a href="/stock/stock_control">在庫</a>
         </li>
@@ -41,8 +37,6 @@
         <li class="nav-item">
           <a href="/stock/sales_history">販売履歴</a>
         </li>
-      
-     
       <form action="{{ route('random_search') }}" method="get" class="d-flex">
         @csrf
         <input type="text" name="input" value="{{$input}}" class="form-control me-2"  placeholder="Search" aria-label="Search">
@@ -52,9 +46,7 @@
     </div>
   </div>
 </nav>
-
 <!-- Navibar END -->
-
 <div class="container-md">
         <!-- mt-3 margin-top: 3; -->
       <div class="row mt-3">
@@ -70,7 +62,6 @@
                   <th></th>
                </tr>
             </thead>
-
             <tbody>
             @foreach($stocks as $key => $v) 
               <tr>
@@ -88,8 +79,7 @@
             @endforeach
             </tbody>
         </table>
-        {{ $stocks->links() }}
-       
+        {{ $stocks->links() }}  
       </div>
 </div>
 

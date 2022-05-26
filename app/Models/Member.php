@@ -51,6 +51,5 @@ class Member extends Authenticatable
         {
             return $this->hasMany(Cart::class);
         }
-        
-     
+            
 }

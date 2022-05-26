@@ -2,17 +2,14 @@
 
 @section('content')
 <h2 class="section-heading-lower">在庫個数（月間）</h2>
-
 <!-- Navibar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    
+  <div class="container-fluid">   
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/stock/stock') }}">製造商品登録</a>
         </li>
@@ -33,12 +30,10 @@
               @endforeach
           </ul>
         </li>
-
         <li>
           <a href="/stock/sales_history">販売履歴</a>
         </li>
-      </ul>
-     
+      </ul>  
       <form action="{{ route('random_search') }}" method="get" class="d-flex">
         @csrf
         <input type="text" name="input" value="{{$input}}" class="form-control me-2"  placeholder="Search" aria-label="Search">
@@ -48,7 +43,6 @@
   </div>
 </nav>
 <!-- Navibar END -->
-
 <div class="container-md">
         <!-- mt-3 margin-top: 3; -->
       <div class="row mt-3">
@@ -63,7 +57,6 @@
                   <th>製造年月日</th>    
                </tr>
             </thead>
-          
             <tbody>
             @foreach($orderQty as $key => $v)
               @foreach ($v as $key2 => $v2)    
@@ -93,9 +86,6 @@
             @endforeach
             </tbody>
         </table>
-
-
-    
       </div>
 </div>
 

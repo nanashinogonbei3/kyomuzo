@@ -1,10 +1,7 @@
 @extends('layouts.shop')
 
-
 @section('content')
-<!-- px 横余白2 -->
 <h3>ご注文ありがとうございました。</h3>
-
 <div class="card">
   <div class="card-body">   
       @foreach ($order as $key => $v) 

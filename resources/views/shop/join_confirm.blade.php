@@ -13,7 +13,6 @@
             &nbsp;&nbsp;&nbsp;
           </div>
           <div class="card-body">
-
             <form action="{{ route('member_store') }}" method="post">
             @csrf
               <!-- Emailアドレス -->
@@ -92,8 +91,6 @@
                   <dt>{{ $inputs['address4'] }}</dt>             
                 </div>
               </div>
-
-         
               <?php if (!empty($inputs['address5'] )) : ?>
               <!-- 建物名 -->
               <div class="row mb-3">
@@ -103,16 +100,12 @@
                 </div>
               </div>
               <?php endif ?>
-
-              <div class="mb-3">
-                
+              <div class="mb-3">     
                 <button type="submit" class="btn btn-primary">登録</button>
                 <br><br>  
                 <!-- キャンセル -->
                 <a href="{{ url('/shop/index') }}" class="btn btn-light">キャンセル</a>
-
               </div>
-
             </form>
             <!-- form END -->
           </div>

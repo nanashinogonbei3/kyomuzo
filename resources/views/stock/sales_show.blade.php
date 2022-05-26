@@ -2,11 +2,9 @@
 
 @section('content')
 <h2 class="section-heading-lower">売上げ明細詳細</h2>
-
 <!-- Navibar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,21 +23,15 @@
         <li class="nav-item">
           <a href="/stock/stock_control">在庫</a>
         </li>
-     
       </ul>
-     
-     
         <button type="submit" value="find" class="btn btn-outline-success" >
         <a href="{{ url('/stock/sales_history') }}">一覧</a></button>
         <br><br><br>
-        <button type="button" class="btn btn-outline-warning" onClick="history.back()">戻る</button>
-      
+        <button type="button" class="btn btn-outline-warning" onClick="history.back()">戻る</button>    
     </div>
   </div>
 </nav>
-
 <!-- Navibar END -->
-
 <div class="container-md">
         <!-- mt-3 margin-top: 3; -->
       <div class="row mt-3">
@@ -52,11 +44,9 @@
                   <th>小計</th>
                   <th>店舗</th>
                   <th>購入者</th>
-                  <th>販売年月日</th>
-                 
+                  <th>販売年月日</th>     
                </tr>
             </thead>
-
             <tbody>
             @foreach ($orders as $key => $v)
               <tr>
@@ -66,15 +56,11 @@
                   <td>￥{{ $v['price'] * $v['order_quantity'] }}</td>
                   <td>{{ $v['shop_name'] }}</td>
                   <td>{{ $v['last_name'] }}&nbsp;様</td>
-                  <td>{{ $v['order_date'] }}</td>
-                  
-                 
+                  <td>{{ $v['order_date'] }}</td>   
               </tr>
             @endforeach
             </tbody>
         </table>
-
-
         <!-- 支払方法 -->
         <div class="card text-center">
           <div class="card-header">
@@ -84,27 +70,21 @@
               </li>
               <li class="nav-item">
                <p class="card-title">お支払方法・商品のお渡し方法</p>
-              </li>
-              
+              </li>     
             </ul>
           </div>
           <div class="card-body">
-          @foreach ($orders as $key => $v)
-            
+          @foreach ($orders as $key => $v)   
             <p class="card-text">{{ $v['payment_method'] }}</p>
             <p class="card-text">{{ $v['receiving_method'] }}</p>
             <p class="card-text">合計金額：￥{{ $total }}</p>
             @break
           @endforeach
           </div>
-
-
         <!-- END card text-center -->
         </div>
-
-        <!-- ***** -->
-         <!-- 配送先 -->
-          <!-- 支払方法 -->
+        <!-- 配送先 -->
+        <!-- 支払方法 -->
         @foreach ($orders as $key => $v)
           @if ($v['receiving_method'] === "ご自宅配送") 
         <div class="card text-center">
@@ -124,23 +104,16 @@
             </ul>
           </div>
           <div class="card-body">
-          
-          
-           
             <p class="card-text">〒{{ $v['postal_code'] }}&nbsp;&nbsp;{{ $v['address1'] }}
               {{ $v['address2'] }}{{ $v['address3'] }}{{ $v['address4'] }}{{ $v['address5'] }}</p>
             <p class="card-text">{{ $v['last_name'] }}&nbsp;&nbsp;{{ $v['first_name'] }}&nbsp;様</p>
-
-            <p>配送方法：クール宅急便</p>
-          
+            <p>配送方法：クール宅急便</p>    
           </div>
-
         <!-- END card text-center -->
         </div>
           @endif
            @break
         @endforeach
-
       </div>
 </div>
 

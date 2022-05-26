@@ -2,7 +2,6 @@
 
 @section('content')
 <span class="section-heading-lower">製造商品登録</span>
-
   <div class="container-md">
     <!-- mt-3 margin-top: 3; -->
     <div class="row mt-3">
@@ -14,14 +13,11 @@
           </div>
           <div class="card-body">
             <form action="{{ route('stock_update', $stocks) }}" method="post">
-      
               @csrf
               <!-- 商品ID(商品名) -->
               <div class="row mb-3">
-            
                 <!-- 必須ボタンは、bootstrap https://getbootstrap.com/docs/5.1/components/badge/ -->
                 <label for="inputProductId" class="col-sm-2 col-form-label">商品ID&nbsp;<span class="badge bg-danger">必須</span></label>
-                
                   <div class="col-sm-3">
                         @if ($errors->has('product_id'))
                         @foreach($errors->get('product_id') as $message)
@@ -40,13 +36,9 @@
                         <!-- product_id(product_name) END -->
                   </div>
               </div>
-             
-
               <!-- 店舗ID -->
               <div class="row mb-3">
-
                 <label for="inputShop" class="col-sm-2 col-form-label">店舗名&nbsp;<span class="badge bg-danger">必須</span></label>
-
                   <div class="col-sm-4">
                         @if ($errors->has('shop_id'))
                         @foreach($errors->get('shop_id') as $message)
@@ -64,13 +56,9 @@
                         <!-- shop END -->
                   </div>
               </div>
-
                <!-- 数量 -->
                <div class="row mb-3">
-
                   <label for="inputStockQty" class="col-sm-2 col-form-label">数量&nbsp;<span class="badge bg-danger">必須</span></label>
-
-
                   <div class="col-sm-2">
                         <!-- 今現在のDB登録している在庫個数 -->
                         {{ $stocks['stock_quantity'] }}
@@ -83,12 +71,9 @@
                         @enderror
                   </div>
               </div>
-
               <!-- 製造年月日 -->
               <div class="row mb-3">
-
                 <label for="inputProductionDate" class="col-sm-2 col-form-label">製造年月日&nbsp;<span class="badge bg-danger">必須</span></label>
-
                 <div class="col-sm-3">
                         <!-- 今現在のDB登録している製造年月日 -->
                         {{ $stocks['production_date'] }}
@@ -98,15 +83,12 @@
                           <br>
                           @endforeach
                         @endif
-
                   <input type="date" name="production_date" id="inputProductionDate" class="form-control
-                                    @error('production_date') is-invalid @enderror " value="{{ old('production_date') }}" aria-describedby="validateExpirationDate">
-                 
+                  @error('production_date') is-invalid @enderror " value="{{ old('production_date') }}" aria-describedby="validateExpirationDate">
                 </div>
               </div>
               <a href="{{ url('/stock/stock_list') }}" class="btn btn-light">戻る</a>
               <button type="submit" class="btn btn-primary">登録</button>
-         
             </form>
           <!-- div.card-body END -->
           </div>

@@ -2,17 +2,14 @@
 
 @section('content')
 <h2 class="section-heading-lower">製造商品管理画面</h2>
-
 <!-- Navibar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    
+  <div class="container-fluid">   
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/stock/stock') }}">製造商品登録</a>
         </li>
@@ -35,7 +32,6 @@
         <li class="nav-item">
           <a class="nav-link disabled">ログアウト</a>
         </li>
-     
       </ul>
       <form action="{{ route('random_search') }}" method="get" class="d-flex">
         @csrf
@@ -45,9 +41,7 @@
     </div>
   </div>
 </nav>
-
 <!-- Navibar END -->
-
 <div class="container-md">
         <!-- mt-3 margin-top: 3; -->
       <div class="row mt-3">
@@ -60,16 +54,12 @@
                   <th>製造個数</th>
                   <th>製造年月日</th>
                   <th>登録者名</th>
-     
                   <th></th>
                </tr>
             </thead>
             <tbody>
-              <tr>
-
-           
+              <tr> 
             <tbody>
-        
                   @foreach($items as $key => $v)
               <tr>
                   <td>{{ $v->id }}</td>
@@ -78,18 +68,14 @@
                   <td>{{ $v->stock_quantity }}</td>
                   <td>{{ $v->production_date }}</td>
                   <td>{{ $v->last_name }}</td>
-
                   <td>
                     <a href="{{ route('stock_show', $v->id ) }}" class="btn btn-primary">詳細</a>
                     <a href="{{ route('stock_edit', $v->id ) }}" class="btn btn-primary">修正</a>
                   </td>
               </tr>
                   @endforeach
-            </tbody>      
-       
-          
+            </tbody>       
         </table>
-
         {{ $items->links() }}
       </div>
 </div>

@@ -1,12 +1,9 @@
 @extends('layouts.shop')
 
-
 @section('content')
 <main class="row mt-3 px-2">
      
-
-      <!-- card （白あん）-->
-
+      <!-- card （黄みあん）-->
       <div class="card mb-3">
             <img src="../../../assets/img/gozasoro.png" class="card-img-top" alt="虚無蔵(白あん)">
             <div class="card-body">

@@ -1,8 +1,6 @@
 @extends('layouts.shop')
 
-
 @section('content')
-
 
 <h3>取扱い店舗一覧</h3>
 <!-- card  -->

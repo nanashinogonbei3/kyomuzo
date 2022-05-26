@@ -2,11 +2,9 @@
 
 @section('content')
 <h2 class="section-heading-lower">商品別在庫個数</h2>
-
 <!-- Navibar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,7 +31,6 @@
               @endforeach
           </ul>
         </li>
-
         <li class="nav-item">
           <a href="/stock/stock_control">在庫</a>
         </li>
@@ -47,7 +44,6 @@
   </div>
 </nav>
 <!-- Navibar END -->
-
 <div class="container-md">
         <!-- mt-3 margin-top: 3; -->
       <div class="row mt-3">
@@ -62,7 +58,6 @@
                   <th>製造年月日</th>    
                </tr>
             </thead>
-          
             <tbody>
             @foreach($orderQty as $key => $v)
               @foreach ($v as $key2 => $v2)          
@@ -80,9 +75,6 @@
             @endforeach
             </tbody>
         </table>
-
-
-    
       </div>
 </div>
 

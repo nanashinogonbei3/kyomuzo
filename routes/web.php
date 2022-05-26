@@ -25,18 +25,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
-
-
-
 // ****** */ MemberProductController **********************************************
-
 
 // 顧客リスト
 Route::get('/product/member', 'App\Http\Controllers\MemberController@index');
-
-
 // トップ画面を表示します。
 Route::get('/shop/index', 'App\Http\Controllers\MemberController@index')->name('index');
 // 会員登録して、ログイン後のリダイレクト先
@@ -53,9 +45,6 @@ Route::post('shop/store', 'App\Http\Controllers\MemberController@store')->name('
 Route::get('shop/login', 'App\Http\Controllers\MemberController@getAuth')->name('login'); 
 // ログイン入力したインプットした値を送る
 Route::post('shop/login', 'App\Http\Controllers\MemberController@postAuth')->name('login');
-
-// テスト表示用（後で削除予定）
-Route::post('shop/confirm', 'App\Http\Controllers\MemberController@orderconfirm')->name('orderconfirm');
 
 // ****** */ StockController *************************************************************
 
@@ -99,7 +88,6 @@ Route::get('stock/sales_productSearch/{id}', 'App\Http\controllers\StockControll
 // 販売履歴 ランダムに入力フォームで店舗名、商品名、顧客名、などで検索した結果を表示します。
 Route::get('stock/sales_randomSerch', 'App\Http\controllers\StockController@sales_randomSerch')->name('sales_randomSerch');
 
-
 // ****** */ OrderController *************************************************************
 
 // 注文画面 「取り扱い店舗一覧」表示画面
@@ -115,7 +103,6 @@ Route::post('shop/purchase', 'App\Http\Controllers\OrderController@shop')->name(
 //カートに入れる押下（Cartモデルに挿入）後に、リダイレクトする画面です。
 Route::get('shop/confirm', 'App\Http\Controllers\OrderController@cart')->name('confirm');
 Route::post('shop/confirm', 'App\Http\Controllers\OrderController@cart')->name('confirm');
-
 //confirm画面で、各商品名、それらの注文個数、各合計金額を表示します。
 Route::get('shop/confirm', 'App\Http\Controllers\OrderController@ses_get');
 //purchas.bladeの「戻る」ボタンから、カートの注文個数一覧を表示します。
@@ -167,12 +154,9 @@ Route::get('shop/root_result', 'App\Http\Controllers\OrderController@rootResult'
 //緯度経度を取得して太秦店までのルート・マップを表示します。
 Route::get('shop/root_result_uzumasa', 'App\Http\Controllers\OrderController@rootResult2')->name('rootResult2');
 
-
 // **For Page custom テスト表示用 ************************************
 
 // *****************************************************
-     
-
 
 // 営業時間 営業時間だけ掲示するページ
 Route::get('/shop/opening_hours', function () {
@@ -183,7 +167,6 @@ Route::get('/shop/opening_hours', function () {
 Route::get('/shop/order_shiro', function() {
   return view('shop.order_shiro');
 });
-
 
 // *******************************************
 // ログアウト
