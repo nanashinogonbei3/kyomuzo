@@ -72,7 +72,6 @@
                         虚無蔵</a></span>
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/shop/index') }}">商品</a></li>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="about.html">オンラインショップ</a></li>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/shop/stores') }}">店舗</a></li>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/shop/login') }}">ログイン</a></li>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/shop/registration') }}">会員登録</a></li>
