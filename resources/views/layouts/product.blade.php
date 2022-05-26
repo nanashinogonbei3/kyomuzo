@@ -55,7 +55,7 @@
                         虚無蔵</a></span>
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/stock/stock_list') }}">製造商品リスト</a></li>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/product/order') }}">注文履歴</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/stock/sales_history') }}">販売履歴</a></li>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/shop/login') }}">ログイン</a></li>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url('/shop/registration') }}">ログアウト</a></li>
                 </ul>
