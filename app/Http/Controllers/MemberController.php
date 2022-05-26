@@ -27,9 +27,7 @@ class MemberController extends Controller
         $members = Member::orderBy('id', 'asc')
         ->Paginate(7);
  
-  
         return view('product.member', ['members' => $members]); 
-
 
     }
 
@@ -43,67 +41,42 @@ class MemberController extends Controller
         return view('shop/registration', compact('member'));
     }
 
-
     
     public function confirm(Request $registration)
     {
         
     // バリデーションを実行（結果に問題があれば処理を中断してエラーを返す
-    $registration->validate( [
-        
-        // 氏名
-        'last_name' => 'required',
-        // 名前
-        'first_name' => 'required',
-        // emailは、メールアドレス形式に。
-        'email' => 'required | email',
-        // パスワードは英数字記号を混合パスワードは8桁以上で
-        'password' => 'required | min:8', 'regex:/^[!-~]+$/',
-        // 電話番号は10桁または11桁になります
-        'phone_number' => 'required | numeric','digits_between:10,11',
-        // 郵便番号
-        'postal_code' => 'required | min:8', 'regex',
-        // 郵便局APIを使用するため、都道府県、市区名、町名までのrequiredは全て不要
-        'address4' => 'required',
-        // 建物名があれば入力
+    $registration->validate( [   
+        'last_name' => 'required',// 氏名
+        'first_name' => 'required',// 名前
+        'email' => 'required | email',// emailは、メールアドレス形式に。
+        'password' => 'required | min:8', 'regex:/^[!-~]+$/',// パスワードは英数字記号を混合パスワードは8桁以上で
+        'phone_number' => 'required | numeric','digits_between:10,11',// 電話番号は10桁または11桁になります
+        'postal_code' => 'required | min:8', 'regex',// 郵便番号
+        'address4' => 'required',// 郵便局APIを使用するため、都道府県、市区名、町名までのrequiredは全て不要 
     ],
-
-        [
-        //氏名 
-        'last_name.required' => '氏名を入力してください。',
-        // 名前
-        'first_name.required' => 'お名前を入力してください。',
-        // メールアドレス
-        'email.required' => 'メールアドレスを入力してください。。',
+    [   
+        'last_name.required' => '氏名を入力してください。',//氏名
+        'first_name.required' => 'お名前を入力してください。',// 名前
+        'email.required' => 'メールアドレスを入力してください。。',// メールアドレス
         'email.email' => 'メールアドレス形式ではありません。',
-        // パスワード
-        'password.required' => 'パスワードを入力してください。',
+        'password.required' => 'パスワードを入力してください。',// パスワード
         'password.min' => 'パスワードは8桁以上を入力してください。',
         'password.regex' => 'パスワードは英数字記号を混合してください。',
-        // 電話番号 
-        'phone_number.required' => '電話番号を入力してください。',
+        'phone_number.required' => '電話番号を入力してください。',// 電話番号 
         'phone_number.numeric' => '電話番号はハイフンなしで10桁から11桁で入力してください。',
         'phone_number.digits_between' => '電話番号はハイフンなしで10桁から11桁で入力してください。',
-        // 郵便番号
-        'postal_code.required' => '郵便番号を入力してください。',
-        // 番地は―（ハイフン）を含めて８桁にしてください。
-        'postal_code.min' => '郵便番号は8桁にしてください。',
-        // 'postal_code.numeric' => '郵便番号はハイフンなしで7桁を入力してください。',
-        'postal_code.regex' => '郵便番号はハイフンを入れてください。',
-        // 番地を入力してください。
-        'address4.required' => '番地を入力してください。',          
-    ]);
-
-        // フォームから受け取った全ての値を取得し$inputに代入
-        $input = $registration->all();
-
+        'postal_code.required' => '郵便番号を入力してください。',// 郵便番号
+        'postal_code.min' => '郵便番号は8桁にしてください。',// 番地は―（ハイフン）を含めて８桁にしてください。
+        'postal_code.regex' => '郵便番号はハイフンを入れてください。',// 'postal_code.numeric' => '郵便番号はハイフンなしで7桁を入力してください。',
+        'address4.required' => '番地を入力してください。', // 番地を入力してください。       
+    ]);   
+        $input = $registration->all();// フォームから受け取った全ての値を取得し$inputに代入
         // バリデーション設定のない確認画面join_confirm.blade.phpで
         // デベロッパーツールを使って値を書き換えられないように
         // セッションに値を保管しておく
         // セッションに値を保存する
         $registration->session()->put('inputs', $input);
-
-
         // コンパクトはオブジェクトで、配列ではないから、ブレード表示は
         // $registration->email 
         // 因みに配列の時は、$registration['email']と書く。
@@ -124,11 +97,9 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-
-        // タイムアウトしない
-        ini_set("max_execution_time", 0); 
-        // パース時間を設定しない
-        ini_set("max_input_time", 0); 
+        
+        ini_set("max_execution_time", 0); //タイムアウトしない
+        ini_set("max_input_time", 0); //パース時間を設定しない
 
         $member = new Member();
 
@@ -139,54 +110,8 @@ class MemberController extends Controller
         $member->password = Hash::make($inputs['password']);
 
         $member->save();
-
-        // ログイン画面にリダイレクト 
-        return redirect()->route('login');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+         
+        return redirect()->route('login');// ログイン画面にリダイレクト
     }
 
 
@@ -210,8 +135,8 @@ class MemberController extends Controller
         return redirect()->route('shop.join_confirm');
     }
 
-    // ログイン入力フォーム画面を表示する
-    public function getAuth(Request $request)
+    
+    public function getAuth(Request $request)// ログイン入力フォーム画面を表示する
     {
         $param = ['message' => 'ログインして下さい。'];
         return view('shop.login', $param);
@@ -229,12 +154,10 @@ class MemberController extends Controller
                 'password' => $password
             ]
         )) {
-   
-            // 入力したEmailとパスワードがtrueなら、index画面に遷移する。
-            return redirect()->route('index');
-            
-            // 入力したEmailとパスワードがfalseなら、ログイン入力フォーム画面にリダイレクト。
-        } else {
+       
+        return redirect()->route('index');// 入力したEmailとパスワードがtrueなら、index画面に遷移する。
+                   
+        } else {// 入力したEmailとパスワードがfalseなら、ログイン入力フォーム画面にリダイレクト。
             $msg = 'ログインに失敗しました。';
             return redirect()->route('login');
         }
