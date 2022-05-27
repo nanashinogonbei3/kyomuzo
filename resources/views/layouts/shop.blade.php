@@ -57,9 +57,6 @@
                                 <li><a class="dropdown-item" href="{{ url('/shop/stores') }}">京都祇園店</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/shop/opening_hours') }}">営業時間</a>
-                        </li>
                     </ul>
                 </div>
             </div>
