@@ -59,15 +59,15 @@ class StockController extends Controller
         $getShopNameList = New Shop;
         $shopName_List = $getShopNameList->getShopList();
 
-            //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
-            $input = '';
+        //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
+        $input = '';
 
-            $param = ['input' => $request->query('input'), 'stocks' => $stockPaginate, 'productName_List' => $productName_List, 'input' => $input,
-            'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
+        $param = ['input' => $request->query('input'), 'stocks' => $stockPaginate, 'productName_List' => $productName_List, 'input' => $input,
+        'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
-            return view('stock.stock_list', $param);
+        return view('stock.stock_list', $param);
             
-        }
+    }
     
 
     public function stockControl(Request $request)
@@ -86,15 +86,15 @@ class StockController extends Controller
         // https://www.php.net/manual/ja/datetime.construct.php
         $dateTime = new DateTime();
 
-            $dateTime->setTimezone(new DateTimeZone('Asia/Tokyo')); //タイムゾーンを設定します。
-            // $order1 には、求めたい値、今回は”何日ごとに、何個販売したか？”を求めたいので、
-            // 配列は、->select('order_quantity')だけ指定します。
-            $d = $dateTime->format('d');//今日の日付だけ取得します。今日が5/10なら、"10"を取得します       
-            // for (5/1～5/31まで1日づつ足していく。)//5月なら31日分を、for文で反復する。
-            //t	指定した月の日数。28 から 31 
-            $dateTime->sub(new DateInterval('P' . ($d - 1) . 'D')); //今月の〇/1を取得。今日5/11-(11-1)=11-(10)=5-1今日の日付から(今日の日付 - 1)を引き、DateTimeクラスのインスタンスを今月の1日の日付に設定します。
-                $date = 1; // カレンダーに記述する日付のカウンタ。
-                $monthDays = $dateTime->format('t'); //当月に何日あるかの日数を求めます。その日が5月なら5月の日数31日。
+        $dateTime->setTimezone(new DateTimeZone('Asia/Tokyo')); //タイムゾーンを設定します。
+        // $order1 には、求めたい値、今回は”何日ごとに、何個販売したか？”を求めたいので、
+        // 配列は、->select('order_quantity')だけ指定します。
+        $d = $dateTime->format('d');//今日の日付だけ取得します。今日が5/10なら、"10"を取得します       
+        // for (5/1～5/31まで1日づつ足していく。)//5月なら31日分を、for文で反復する。
+        //t	指定した月の日数。28 から 31 
+        $dateTime->sub(new DateInterval('P' . ($d - 1) . 'D')); //今月の〇/1を取得。今日5/11-(11-1)=11-(10)=5-1今日の日付から(今日の日付 - 1)を引き、DateTimeクラスのインスタンスを今月の1日の日付に設定します。
+            $date = 1; // カレンダーに記述する日付のカウンタ。
+            $monthDays = $dateTime->format('t'); //当月に何日あるかの日数を求めます。その日が5月なら5月の日数31日。
         for ($date = 0; $date < $monthDays; $date++) { //月の日数分反復します。今日が5月なら31日間です。
             // $order['2022-5-11'] = $order1; // 配列$order1 をfor文で回して、新規キー['2022-5-11']を作成し代入します。
             $order = DB::table('stocks') //〇月1日～〇月31日までをfor文の中で繰り返します。
@@ -112,9 +112,9 @@ class StockController extends Controller
                 'shop_name', 
                 )->get();        
         
-                $orderQty[$dateTime->format('Y-m-d')] = $order;  //$order1を配列を、[キー名：2022-05-01]keyを1行づつ日付ごとに作成していきます。 5/1 = order1の配列に5/1があれば、キー$order[2022-05-1]にorder_quantityの販売個数を代入します。
-                //キー：$order[2022-05-10] => 31個（'order_quantity')//こういう配列のキー、値になります// for文で繰り返し、5月の日数分繰り返して配列を作ります。         
-                $dateTime->add(new DateInterval("P1D"));//+1日,P1D 1日足します。Pはピリオド、’間隔’、Dは’日’を表す。’P1D’は’1日間隔’PHP公式マニュアル☞https://www.php.net/manual/ja/dateinterval.construct.php
+            $orderQty[$dateTime->format('Y-m-d')] = $order;  //$order1を配列を、[キー名：2022-05-01]keyを1行づつ日付ごとに作成していきます。 5/1 = order1の配列に5/1があれば、キー$order[2022-05-1]にorder_quantityの販売個数を代入します。
+            //キー：$order[2022-05-10] => 31個（'order_quantity')//こういう配列のキー、値になります// for文で繰り返し、5月の日数分繰り返して配列を作ります。         
+            $dateTime->add(new DateInterval("P1D"));//+1日,P1D 1日足します。Pはピリオド、’間隔’、Dは’日’を表す。’P1D’は’1日間隔’PHP公式マニュアル☞https://www.php.net/manual/ja/dateinterval.construct.php
         }
             
         $getProductNameList = new Product; // しろあん・くろあん
@@ -123,11 +123,11 @@ class StockController extends Controller
         $getShopNameList = New Shop; // 店舗リスト
         $shopName_List = $getShopNameList->getShopList();//店舗検索 プルダウンの店舗リストです。
 
-            $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
-        
-            return view('stock.stock_control', compact('orderQty','productName_List','shopName_List','input'));//stock_controlで店舗・商品別に在庫数を表示します。
+        $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
+    
+        return view('stock.stock_control', compact('orderQty','productName_List','shopName_List','input'));//stock_controlで店舗・商品別に在庫数を表示します。
 
-        }
+    }
 
     public function findstockControl(Request $productId)//productIdでRequestを受け取るようにします。
     {
@@ -147,28 +147,28 @@ class StockController extends Controller
             $dateTime->sub(new DateInterval('P' . ($d - 1) . 'D')); //今月の〇/1を取得。今日5/11-(11-1)=11-(10)=5-1今日の日付から(今日の日付 - 1)を引き、DateTimeクラスのインスタンスを今月の1日の日付に設定します。
             $date = 1; 
             $monthDays = $dateTime->format('t'); //当月に何日あるかの日数を求めます。
-        for ($date = 0; $date < $monthDays; $date++) { //月の日数分反復します。
-            // $order['2022-5-11'] = $order1;  配列$order1 をfor文で回して、新規キー['2022-5-11']を作成し代入します。
-            $order = DB::table('stocks') //〇月1日～〇月31日までをfor文の中で繰り返します。
-            ->whereDate('stocks.created_at', '=', $dateTime->format('Y-m-d') ) //登録日:〇月〇日を今日の日付でフォーマットとイコールにします。
-            ->join('products', 'products.id', '=', 'stocks.product_id')  
-            ->join('shops', 'shops.id', '=', 'stocks.shop_id')
-            ->select(DB::raw('SUM(stock_quantity) as total_stock'),
-            'product_name', 
-            'shop_name', 
-            'stocks.product_id', 'stocks.shop_id', 
-            'stocks.stock_quantity','sales_date',
-            'stocks.production_date',                   
-            )->groupBy(
-            'product_name',
-            'shop_name',
-            )->orderBy('stocks.created_at', 'desc')->where('stocks.product_id', '=', $productId->id) 
-            ->get();
+            for ($date = 0; $date < $monthDays; $date++) { //月の日数分反復します。
+                // $order['2022-5-11'] = $order1;  配列$order1 をfor文で回して、新規キー['2022-5-11']を作成し代入します。
+                $order = DB::table('stocks') //〇月1日～〇月31日までをfor文の中で繰り返します。
+                ->whereDate('stocks.created_at', '=', $dateTime->format('Y-m-d') ) //登録日:〇月〇日を今日の日付でフォーマットとイコールにします。
+                ->join('products', 'products.id', '=', 'stocks.product_id')  
+                ->join('shops', 'shops.id', '=', 'stocks.shop_id')
+                ->select(DB::raw('SUM(stock_quantity) as total_stock'),
+                'product_name', 
+                'shop_name', 
+                'stocks.product_id', 'stocks.shop_id', 
+                'stocks.stock_quantity','sales_date',
+                'stocks.production_date',                   
+                )->groupBy(
+                'product_name',
+                'shop_name',
+                )->orderBy('stocks.created_at', 'desc')->where('stocks.product_id', '=', $productId->id) 
+                ->get();
+                
+                $orderQty[$dateTime->format('Y-m-d')] = $order; //$order1を配列を、[キー名：2022-05-01]keyを1行づつ日付ごとに作成していきます。 5/1 = order1の配列に5/1があれば、キー$order[2022-05-1]にorder_quantityの販売個数を代入します。
             
-            $orderQty[$dateTime->format('Y-m-d')] = $order; //$order1を配列を、[キー名：2022-05-01]keyを1行づつ日付ごとに作成していきます。 5/1 = order1の配列に5/1があれば、キー$order[2022-05-1]にorder_quantityの販売個数を代入します。
-        
-            $dateTime->add(new DateInterval("P1D"));//+1日,P1D 1日を足します。Pはピリオド、’間隔’、Dは’日’を表す。’P1D’は’1日間隔’PHP公式マニュアル☞https://www.php.net/manual/ja/dateinterval.construct.php
-        } 
+                $dateTime->add(new DateInterval("P1D"));//+1日,P1D 1日を足します。Pはピリオド、’間隔’、Dは’日’を表す。’P1D’は’1日間隔’PHP公式マニュアル☞https://www.php.net/manual/ja/dateinterval.construct.php
+            } 
 
             $getProductNameList = new Product; // しろあん・くろあん
             $productName_List = $getProductNameList->getProductList();//商品検索 プルダウンの商品リストです。
@@ -204,28 +204,28 @@ class StockController extends Controller
             $dateTime->sub(new DateInterval('P' . ($d - 1) . 'D')); //今月の〇/1を取得。今日5/11-(11-1)=11-(10)=5-1今日の日付から(今日の日付 - 1)を引き、DateTimeクラスのインスタンスを今月の1日の日付に設定します。
             $date = 1; 
             $monthDays = $dateTime->format('t'); //当月に何日あるかの日数を求めます。
-        for ($date = 0; $date < $monthDays; $date++) { //月の日数分反復します。
-            // $order['2022-5-11'] = $order1;  配列$order1 をfor文で回して、新規キー['2022-5-11']を作成し代入します。
-            $order = DB::table('stocks') //〇月1日～〇月31日までをfor文の中で繰り返します。
-            ->whereDate('stocks.created_at', '=', $dateTime->format('Y-m-d') ) //登録日:〇月〇日を今日の日付でフォーマットとイコールにします。
-            ->join('products', 'products.id', '=', 'stocks.product_id')  
-            ->join('shops', 'shops.id', '=', 'stocks.shop_id')
-            ->select(DB::raw('SUM(stock_quantity) as total_stock'),
-            'product_name', 
-            'shop_name', 
-            'stocks.product_id', 'stocks.shop_id', 
-            'stocks.stock_quantity','sales_date',
-            'stocks.production_date',              
-            )->groupBy(
-                'product_name',
-                'shop_name',
-            )->orderBy('stocks.created_at', 'desc')->where('stocks.shop_id','=',$shopId->id)
-            ->get();
+            for ($date = 0; $date < $monthDays; $date++) { //月の日数分反復します。
+                // $order['2022-5-11'] = $order1;  配列$order1 をfor文で回して、新規キー['2022-5-11']を作成し代入します。
+                $order = DB::table('stocks') //〇月1日～〇月31日までをfor文の中で繰り返します。
+                ->whereDate('stocks.created_at', '=', $dateTime->format('Y-m-d') ) //登録日:〇月〇日を今日の日付でフォーマットとイコールにします。
+                ->join('products', 'products.id', '=', 'stocks.product_id')  
+                ->join('shops', 'shops.id', '=', 'stocks.shop_id')
+                ->select(DB::raw('SUM(stock_quantity) as total_stock'),
+                'product_name', 
+                'shop_name', 
+                'stocks.product_id', 'stocks.shop_id', 
+                'stocks.stock_quantity','sales_date',
+                'stocks.production_date',              
+                )->groupBy(
+                    'product_name',
+                    'shop_name',
+                )->orderBy('stocks.created_at', 'desc')->where('stocks.shop_id','=',$shopId->id)
+                ->get();
+                
+                $orderQty[$dateTime->format('Y-m-d')] = $order; //$order1を配列を、[キー名：2022-05-01]keyを1行づつ日付ごとに作成していきます。 5/1 = order1の配列に5/1があれば、キー$order[2022-05-1]にorder_quantityの販売個数を代入します。
             
-            $orderQty[$dateTime->format('Y-m-d')] = $order; //$order1を配列を、[キー名：2022-05-01]keyを1行づつ日付ごとに作成していきます。 5/1 = order1の配列に5/1があれば、キー$order[2022-05-1]にorder_quantityの販売個数を代入します。
-        
-            $dateTime->add(new DateInterval("P1D"));//+1日,P1D 1日を足します。Pはピリオド、’間隔’、Dは’日’を表す。’P1D’は’1日間隔’PHP公式マニュアル☞https://www.php.net/manual/ja/dateinterval.construct.php
-        }
+                $dateTime->add(new DateInterval("P1D"));//+1日,P1D 1日を足します。Pはピリオド、’間隔’、Dは’日’を表す。’P1D’は’1日間隔’PHP公式マニュアル☞https://www.php.net/manual/ja/dateinterval.construct.php
+            }
         
             $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
 
@@ -276,22 +276,19 @@ class StockController extends Controller
             null, // 現在のページ(ページャーの色がActiveになる)
             ['path' => $request->url()] // ページャーのリンクをOptionのpathで指定
         );
-
-            //検索
-            $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
-            
+     
         $getProductNameList = new Product; // しろあん・
         $productName_List = $getProductNameList->getProductList();
         
         $getShopNameList = New Shop; // 店舗リスト
         $shopName_List = $getShopNameList->getShopList();
 
-            $param = ['input' => $request->query('input'), 'items' => $orderPaginate, 'productName_List' => $productName_List,
-            'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
+        $param = ['input' => $request->query('input'), 'items' => $orderPaginate, 'productName_List' => $productName_List,
+        'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
-            return view('stock/sales_history', $param);
+        return view('stock/sales_history', $param);
 
-        }
+    }
 
 
     public function sales_shopsearch(Request $request)
@@ -321,20 +318,17 @@ class StockController extends Controller
             null, // 現在のページ(ページャーの色がActiveになる)
             ['path' => $request->url()] // ページャーのリンクをOptionのpathで指定
             );
-
-            //検索
-            $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
-                
+              
         $getProductNameList = new Product; // しろあん・
         $productName_List = $getProductNameList->getProductList();
         
         $getShopNameList = New Shop; // 店舗リスト
         $shopName_List = $getShopNameList->getShopList();
 
-            $param = ['input' => $request->query('input'), 'items' => $orderPaginate, 'productName_List' => $productName_List,
-            'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
+        $param = ['input' => $request->query('input'), 'items' => $orderPaginate, 'productName_List' => $productName_List,
+        'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
-            return view('stock/sales_shopSearch', $param);
+        return view('stock/sales_shopSearch', $param);
     }
 
 
@@ -366,20 +360,17 @@ class StockController extends Controller
             null, // 現在のページ(ページャーの色がActiveになる)
             ['path' => $request->url()] // ページャーのリンクをOptionのpathで指定
             );
+              
+        $getProductNameList = new Product; // しろあん・
+        $productName_List = $getProductNameList->getProductList();
+    
+        $getShopNameList = New Shop; // 店舗リスト
+        $shopName_List = $getShopNameList->getShopList();
+    
+        $param = ['input' => $request->query('input'), 'items' => $orderPaginate, 'productName_List' => $productName_List,
+        'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
-            //検索
-            $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
-                
-            $getProductNameList = new Product; // しろあん・
-            $productName_List = $getProductNameList->getProductList();
-        
-            $getShopNameList = New Shop; // 店舗リスト
-            $shopName_List = $getShopNameList->getShopList();
-        
-            $param = ['input' => $request->query('input'), 'items' => $orderPaginate, 'productName_List' => $productName_List,
-            'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
-
-            return view('stock/sales_productSearch',$param);
+        return view('stock/sales_productSearch',$param);
     }
 
 
@@ -406,18 +397,18 @@ class StockController extends Controller
                 'orders.id',//注文No.ごとにグループ化します。くろあん、黄みあんの複数注文をに1つにまとめます。
             )->orderBy('order_date', 'desc')->paginate(5);     
         
-            $getProductNameList = new Product; // 黄みあん・くろあん
-            $productName_List = $getProductNameList->getProductList();
-    
-            $getShopNameList = New Shop; // 店舗リスト
-            $shopName_List = $getShopNameList->getShopList();
+        $getProductNameList = new Product; // 黄みあん・くろあん
+        $productName_List = $getProductNameList->getProductList();
 
-            $param = ['input' => $request->query('input'), 'items' => $item, 'productName_List' => $productName_List,
-            'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
+        $getShopNameList = New Shop; // 店舗リスト
+        $shopName_List = $getShopNameList->getShopList();
 
-            unset($request['_token']);    
+        $param = ['input' => $request->query('input'), 'items' => $item, 'productName_List' => $productName_List,
+        'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
-            return view('stock/sales_randomSerch', $param);
+        unset($request['_token']);    
+
+        return view('stock/sales_randomSerch', $param);
     }
 
 
@@ -444,18 +435,18 @@ class StockController extends Controller
             ->where('orders.id', '=', $id)
             ->get();
 
-            $orders = json_decode(json_encode($items), true); //php 多次元配列になったコレクションstdClassをArrayにキャストする
+        $orders = json_decode(json_encode($items), true); //php 多次元配列になったコレクションstdClassをArrayにキャストする
 
-            $total = 0;
-            foreach ($orders as $key => $v) {
+        $total = 0;
+        foreach ($orders as $key => $v) {
+        
+        // 自己代入 $x = $x + 1 => $x += 1 => 0 + 1 = 1 ,$x = 1, $x = $x + 1 => 1+1 = 2 -->   
+        $total += ($v['price'] * $v['order_quantity']); 
+
+        } 
             
-            // 自己代入 $x = $x + 1 => $x += 1 => 0 + 1 = 1 ,$x = 1, $x = $x + 1 => 1+1 = 2 -->   
-            $total += ($v['price'] * $v['order_quantity']); 
-
-            } 
-                
-            // orders テーブルと、order_detailsテーブルをリレーションして表示します。
-            return view('stock/sales_show', compact('orders', 'total'));
+        // orders テーブルと、order_detailsテーブルをリレーションして表示します。
+        return view('stock/sales_show', compact('orders', 'total'));
     }
 
         
@@ -487,9 +478,9 @@ class StockController extends Controller
                 ->where('stocks.product_id', '=', $productId->id)   
                 ->orderBy('stocks.id','desc')->paginate(5);
 
-                $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
+            $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
 
-                return view('stock.find_stock', compact('param', 'stocks', 'productName_List', 'shopName_List', 'input'));
+            return view('stock.find_stock', compact('param', 'stocks', 'productName_List', 'shopName_List', 'input'));
 
         }
     }
@@ -507,20 +498,20 @@ class StockController extends Controller
         if (isset($shopId->id)) {
             $parameter = ['id' => $shopId->id]; //shop_id をidとして登録します。
         
-        $getProductNameList = new Product; // しろあん・くろあん
-        $productName_List = $getProductNameList->getProductList();
-        
-        $getShopNameList = New Shop; // 店舗リスト
-        $shopName_List = $getShopNameList->getShopList();
+            $getProductNameList = new Product; // 黄みあん・くろあん
+            $productName_List = $getProductNameList->getProductList();
+            
+            $getShopNameList = New Shop; // 店舗リスト
+            $shopName_List = $getShopNameList->getShopList();
 
-        $stocks = DB::table('stocks') //stocksのDBから、商品ID、商品名、在庫ID、店舗ID、製造個数、製造年月日、登録メンバーIDを取得します。
-            ->join('products', 'products.id', '=', 'stocks.product_id')
-            ->join('shops', 'shops.id', '=', 'stocks.shop_id')
-            ->join('members', 'members.id', '=', 'stocks.member_id')
-            ->select('product_name', 'stocks.id', 'stocks.shop_id',
-            'shop_name','stocks.stock_quantity',
-            'stocks.production_date', 'members.last_name')->where('stocks.shop_id', '=', $shopId->id)
-            ->orderBy('stocks.id','desc')->paginate(5);
+            $stocks = DB::table('stocks') //stocksのDBから、商品ID、商品名、在庫ID、店舗ID、製造個数、製造年月日、登録メンバーIDを取得します。
+                ->join('products', 'products.id', '=', 'stocks.product_id')
+                ->join('shops', 'shops.id', '=', 'stocks.shop_id')
+                ->join('members', 'members.id', '=', 'stocks.member_id')
+                ->select('product_name', 'stocks.id', 'stocks.shop_id',
+                'shop_name','stocks.stock_quantity',
+                'stocks.production_date', 'members.last_name')->where('stocks.shop_id', '=', $shopId->id)
+                ->orderBy('stocks.id','desc')->paginate(5);
         
             $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
 
@@ -551,18 +542,18 @@ class StockController extends Controller
             'stocks.production_date', 'members.last_name')
             ->orderBy('stocks.id','desc')->paginate(5);
         
-            $getProductNameList = new Product; // しろあん・くろあん
-            $productName_List = $getProductNameList->getProductList();
-        
-            $getShopNameList = New Shop; // 店舗リスト
-            $shopName_List = $getShopNameList->getShopList();
+        $getProductNameList = new Product; // しろあん・くろあん
+        $productName_List = $getProductNameList->getProductList();
+    
+        $getShopNameList = New Shop; // 店舗リスト
+        $shopName_List = $getShopNameList->getShopList();
 
-            $param = ['input' => $request->query('input'), 'items' => $item, 'productName_List' => $productName_List,
-            'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
+        $param = ['input' => $request->query('input'), 'items' => $item, 'productName_List' => $productName_List,
+        'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
-            unset($request['_token']);  
+        unset($request['_token']);  
 
-            return view('stock.random_search', $param);
+        return view('stock.random_search', $param);
     }
 
         /**
@@ -576,13 +567,13 @@ class StockController extends Controller
 
         $shop = New Shop; // 店舗名とshop_id をShop モデルから受け取ります。  
         
-            $shop_list = $shop->getShopLists()->prepend('店舗選択', ''); // モデルShop.phpで定義した関数getShopListsを呼び出します。// セレクトボックスの最初に「'店舗選択'」を表示します。
-        
-            $product = New Product; // 商品名とproduct_idを、Product モデルから受け取ります。       
-        
-            $product_list = $product->getProductLists()->prepend('商品選択', ''); // モデルProductで定義した関数getProductListsを呼び出す// セレクトボックスの最初に「'商品選択'」を表示します。
-                
-            return view('stock/stock', compact('shop_list', 'product_list')); //製造商品登録の入力フォーム画面を表示する
+        $shop_list = $shop->getShopLists()->prepend('店舗選択', ''); // モデルShop.phpで定義した関数getShopListsを呼び出します。// セレクトボックスの最初に「'店舗選択'」を表示します。
+    
+        $product = New Product; // 商品名とproduct_idを、Product モデルから受け取ります。       
+    
+        $product_list = $product->getProductLists()->prepend('商品選択', ''); // モデルProductで定義した関数getProductListsを呼び出す// セレクトボックスの最初に「'商品選択'」を表示します。
+            
+        return view('stock/stock', compact('shop_list', 'product_list')); //製造商品登録の入力フォーム画面を表示する
     }
 
 
@@ -658,7 +649,7 @@ class StockController extends Controller
     
         $stock->save();
         
-            return redirect()->route('stock_list'); // 製造商品管理画面にリダイレクト 
+        return redirect()->route('stock_list'); // 製造商品管理画面にリダイレクト 
     }
 
     /**
@@ -685,8 +676,8 @@ class StockController extends Controller
 
         $stocks = json_decode(json_encode($stock), true);//jsonのdecodeでコレクションの配列を変換して、すっきりした配列にします。
 
-            return view('stock/show_stock', [
-                'stocks' => $stocks,
+        return view('stock/show_stock', [
+            'stocks' => $stocks,
         ]);
     }
 
@@ -722,7 +713,7 @@ class StockController extends Controller
 
         $stocks = json_decode(json_encode($stock), true);//jsonのdecodeでコレクションの配列を変換して、すっきりした配列にします。
 
-            return view('stock/edit_stock', compact('stocks','product_list','shop_list'));
+        return view('stock/edit_stock', compact('stocks','product_list','shop_list'));
     }
 
     /**
@@ -754,24 +745,24 @@ class StockController extends Controller
         if (empty(Auth::user()->id)) {
             return redirect('shop/login'); 
         } else {
-        $stock->member_id = Auth::user()->id; // 現在ログインidをstock.member_idに代入
-        $stock = stock::find($request->id); // editブレードからPOST送信されたリクエスト$idを受取る    
+            $stock->member_id = Auth::user()->id; // 現在ログインidをstock.member_idに代入
+            $stock = stock::find($request->id); // editブレードからPOST送信されたリクエスト$idを受取る    
 
-        $form = $request->all();
-        unset($form['_token']);
-       
-        $stock->fill($form)->save();//stockクラスに$formの値を挿入する。
+            $form = $request->all();
+            unset($form['_token']);
+        
+            $stock->fill($form)->save();//stockクラスに$formの値を挿入する。
 
-        // 今stocksに登録したレコードを取得します。リレーションして店舗名、商品名も取得します。
-        $stocks = DB::table('stocks')
-            ->join('order_details', 'order_details.product_id', '=', 'products.id')
-            ->join('orders', 'orders.id', '=', 'order_details.order_id')
-            ->join('products', 'products.id','=','stocks.product_id')
-            ->join('shops', 'shops.id', '=', 'stocks.shop_id')
-            ->SELECT('product_id', 'product_name', 'shop_id', 'shop_name', 'stock_quantity', 
-            'production_date')
-            ->where('stocks.id', '=', $request->id)
-            ->get();
+            // 今stocksに登録したレコードを取得します。リレーションして店舗名、商品名も取得します。
+            $stocks = DB::table('stocks')
+                ->join('order_details', 'order_details.product_id', '=', 'products.id')
+                ->join('orders', 'orders.id', '=', 'order_details.order_id')
+                ->join('products', 'products.id','=','stocks.product_id')
+                ->join('shops', 'shops.id', '=', 'stocks.shop_id')
+                ->SELECT('product_id', 'product_name', 'shop_id', 'shop_name', 'stock_quantity', 
+                'production_date')
+                ->where('stocks.id', '=', $request->id)
+                ->get();
 
             return redirect()->route('stock_list', ['stocks' => $stocks]);
         }

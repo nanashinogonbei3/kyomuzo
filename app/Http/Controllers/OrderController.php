@@ -53,33 +53,33 @@ class OrderController extends Controller
 
         $cart = new Cart();
 
-    if (empty(Auth::user()->id)) {
-        return redirect('shop/login');
-    } else {
-        $cart->member_id = Auth::user()->id;  //現在ログインしているメンバーのIDの取得して、Cartクラスのmember_idに代入する
+        if (empty(Auth::user()->id)) {
+            return redirect('shop/login');
+        } else {
+            $cart->member_id = Auth::user()->id;  //現在ログインしているメンバーのIDの取得して、Cartクラスのmember_idに代入する
+            
+            $form = $request->all(); //注文商品ID、注文個数//purchase.bladeから送信されたproduct_ID、order_quantityを受取ります。
+            unset($form['_token']); //tokenを削除   
+            
+            $form['member_id'] = $cart->member_id; //誰が? 現在ログイン中のメンバーidを$formの連想配列に加えます。
+
+            $cart->fill($form)->save(); //Cartクラスでfillableに設定した、cartテーブルのカラムに挿入します。
         
-        $form = $request->all(); //注文商品ID、注文個数//purchase.bladeから送信されたproduct_ID、order_quantityを受取ります。
-        unset($form['_token']); //tokenを削除   
-        
-        $form['member_id'] = $cart->member_id; //誰が? 現在ログイン中のメンバーidを$formの連想配列に加えます。
+            $cart = DB::table('carts')
+            ->select('product_id')
+            ->where('member_id', '=', $form['member_id'])
+            ->orderBy('carts.id','asc')->get();
 
-        $cart->fill($form)->save(); //Cartクラスでfillableに設定した、cartテーブルのカラムに挿入します。
-     
-        $cart = DB::table('carts')
-        ->select('product_id')
-        ->where('member_id', '=', $form['member_id'])
-        ->orderBy('carts.id','asc')->get();
+            if (!empty($cart)) { //カートにproduct_idに値が一つでもあれば、purchase.blade.には戻らず、
+                        
+                return redirect('shop/updateCart'); //updateCart.blade.の注文個数更新に遷移します。
 
-        if (!empty($cart)) { //カートにproduct_idに値が一つでもあれば、purchase.blade.には戻らず、
-                    
-            return redirect('shop/updateCart'); //updateCart.blade.の注文個数更新に遷移します。
+            } else { //カートが空でカートに入れるが押されたら同じ画面にまた戻ります。
+            
+                return redirect('shop/purchase'); //再度、purchase.bladeに戻り、２種類商品が注文できるように同じ画面にリダイレクト/「注文を確定」でようやくconfirmへ
 
-        } else { //カートが空でカートに入れるが押されたら同じ画面にまた戻ります。
-        
-        return redirect('shop/purchase'); //再度、purchase.bladeに戻り、２種類商品が注文できるように同じ画面にリダイレクト/「注文を確定」でようやくconfirmへ
-
-        }
-    } // END IF
+            }
+        } // END IF
 
     }
 
@@ -136,7 +136,7 @@ class OrderController extends Controller
                     'created_at' => $today,
                     'updated_at' => $today,
                 ]);
-              } // END IF
+            } // END IF
              
             if ($v['product_id'] == $request->product_id) { //リクエストされた$request_product_idがDBのproduct_idと一致したら更新処理をします。
             DB::table('carts')
@@ -176,8 +176,8 @@ class OrderController extends Controller
             $total = 0;
             foreach ($orders as $key => $v) {
             
-            // 自己代入 $x = $x + 1 => $x += 1 => 0 + 1 = 1 ,$x = 1, $x = $x + 1 => 1+1 = 2 -->   
-            $total += ($v['price'] * $v['order_quantity']); 
+                // 自己代入 $x = $x + 1 => $x += 1 => 0 + 1 = 1 ,$x = 1, $x = $x + 1 => 1+1 = 2 -->   
+                $total += ($v['price'] * $v['order_quantity']); 
 
             } 
         
@@ -200,23 +200,23 @@ class OrderController extends Controller
         // $d = now(); //・いつ 現在の年月日//"2022年04月30日" 
         // $today = $d->addDay()->format('Y-m-d');
         // $today = date("Y-m-d H:i:s")->format('y-m-d');
-    if (empty(Auth::user()->id)) {
-            return redirect('shop/login');//もしログインIDが空ならログイン画面にリダイレクトします。
-    } else {
-        $memberId = Auth::user()->id; //・誰が メンバーid  現在ログイン中のメンバーのIDを受け取ります。
+        if (empty(Auth::user()->id)) {
+                return redirect('shop/login');//もしログインIDが空ならログイン画面にリダイレクトします。
+        } else {
+            $memberId = Auth::user()->id; //・誰が メンバーid  現在ログイン中のメンバーのIDを受け取ります。
+        
+            $shop = $request->session()->get('input'); //・どこで // セッション$inputに保存した店舗IDを取得して受取ります。  
+            $shopId = $shop['shop_id'];  //連想配列$datasからshop_idだけを取り出します。
     
-        $shop = $request->session()->get('input'); //・どこで // セッション$inputに保存した店舗IDを取得して受取ります。  
-        $shopId = $shop['shop_id'];  //連想配列$datasからshop_idだけを取り出します。
-  
-        $ordersValues = [   //いつ、誰が、どこで。この３つの項目をordersのために連想配列に入れておきます。
-            "member_id" => $memberId,
-            "order_date" => $today,
-            "shop_id" => $shopId
-        ];
-        $request->session()->put('ordersValues', $ordersValues); //$ordersValuesをセッションに保存しておきます。
+            $ordersValues = [   //いつ、誰が、どこで。この３つの項目をordersのために連想配列に入れておきます。
+                "member_id" => $memberId,
+                "order_date" => $today,
+                "shop_id" => $shopId
+            ];
+            $request->session()->put('ordersValues', $ordersValues); //$ordersValuesをセッションに保存しておきます。
 
-        return redirect('shop/receiving'); //もう一度OrderControllerに戻ります。
-      
+            return redirect('shop/receiving'); //もう一度OrderControllerに戻ります。
+        
        }
     }
 
@@ -335,24 +335,24 @@ class OrderController extends Controller
 
         $today = date("Y-m-d H:i:s"); // 現在日時 2022-05-07-03:00 を取得
 
-    foreach ($carts as $key => $v) { //2種類しろあん・くろあん両方の注文を想定してcartsテーブルの多次元配列を取得します。
-        DB::table('order_details')->insert([ // Ordersテーブルにインサートします。
-            'product_id' => $v->product_id,
-            'order_quantity' => $v->order_quantity,
-            'order_id' => $lastInsertId,
-            'created_at' => $today, // テーブルのインサート日時
-            'updated_at' => $today
-        ]);
-    }
-  
-    $order = DB::table('orders') //・注文日、支払方法、受取方法、購入店舗、ご請求金額を表示するために複数テーブルをリレーションします。
-        ->join('order_details', 'order_details.order_id', '=', 'orders.id')
-        ->join('shops', 'shops.id', '=', 'orders.shop_id')
-        ->join('products', 'products.id', '=', 'order_details.product_id') // 後でstocksにインサートする必要なカラムもセレクトしておく。
-        ->select('orders.id','orders.shop_id', 'orders.order_date','orders.member_id','product_id', 'product_name', 'order_quantity', 'order_date','payment_method',
-        'receiving_method','shop_name','price')
-        ->where('orders.id','=', $lastInsertId)
-        ->get();
+        foreach ($carts as $key => $v) { //2種類しろあん・くろあん両方の注文を想定してcartsテーブルの多次元配列を取得します。
+            DB::table('order_details')->insert([ // Ordersテーブルにインサートします。
+                'product_id' => $v->product_id,
+                'order_quantity' => $v->order_quantity,
+                'order_id' => $lastInsertId,
+                'created_at' => $today, // テーブルのインサート日時
+                'updated_at' => $today
+            ]);
+        }
+    
+        $order = DB::table('orders') //・注文日、支払方法、受取方法、購入店舗、ご請求金額を表示するために複数テーブルをリレーションします。
+            ->join('order_details', 'order_details.order_id', '=', 'orders.id')
+            ->join('shops', 'shops.id', '=', 'orders.shop_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id') // 後でstocksにインサートする必要なカラムもセレクトしておく。
+            ->select('orders.id','orders.shop_id', 'orders.order_date','orders.member_id','product_id', 'product_name', 'order_quantity', 'order_date','payment_method',
+            'receiving_method','shop_name','price')
+            ->where('orders.id','=', $lastInsertId)
+            ->get();
 
         $request->session()->put('order', $order); // のちにstocksにインサートする為に必要な情報を保存しておきます。  
         
@@ -374,19 +374,19 @@ class OrderController extends Controller
         //今日の在庫から販売個数を引いていきます 
         // stocks.stock_quantity 在庫数から販売した数を差し引くので注文個数にｘ-1を乗算します 
 
-    foreach ($data as $key => $v) {
-        DB::table('stocks')->insert([ // Ordersテーブルにインサートします。
-            'product_id' => $v->product_id,
-            'shop_id' => $v->shop_id,
-            // stocks.stock_quantity 在庫数から売れた数を差し引くので注文個数にｘ-1を乗算します
-            'stock_quantity' => (-1)*$v->order_quantity, // 販売個数
-            'sales_date' => $v->order_date, // 販売日
-            'created_at' => $today, // テーブルのインサート日時
-            'updated_at' => $today, // テーブルのインサート日時
-        ]);
-    }
+        foreach ($data as $key => $v) {
+            DB::table('stocks')->insert([ // Ordersテーブルにインサートします。
+                'product_id' => $v->product_id,
+                'shop_id' => $v->shop_id,
+                // stocks.stock_quantity 在庫数から売れた数を差し引くので注文個数にｘ-1を乗算します
+                'stock_quantity' => (-1)*$v->order_quantity, // 販売個数
+                'sales_date' => $v->order_date, // 販売日
+                'created_at' => $today, // テーブルのインサート日時
+                'updated_at' => $today, // テーブルのインサート日時
+            ]);
+        }
 
-    Cart::query()->delete(); // Eloquentでレコードを全件削除する
+        Cart::query()->delete(); // Eloquentでレコードを全件削除する
                              
         session()->forget('input'); // 特定のセッションの削除方法です。
         session()->forget('lastInsert_id');
@@ -431,60 +431,60 @@ class OrderController extends Controller
         //受取ったrequest->id が店舗のIDで、どちらの店舗を表示するか切り分けます。
         //店舗のIDによってDBの緯度経度を切り分けて取得します。
 
-    if ($request->id == 1) {//$request->idが1なら太秦店の地図を表示させる処理を実行します。   
+        if ($request->id == 1) {//$request->idが1なら太秦店の地図を表示させる処理を実行します。   
 
-        if (!empty($request->id)) {
-            if ($request->id == 1) {//太秦店の緯度経度をDBから取得します。
-                $shop1_latlng = DB::table('shops') //店舗ID=1 の緯度経度を取出します。
-                ->select('shops.latitude', 'shops.longitude')
-                ->where('shops.id','=', $request->id)
-                ->get(); 
-            } 
+            if (!empty($request->id)) {
+                if ($request->id == 1) {//太秦店の緯度経度をDBから取得します。
+                    $shop1_latlng = DB::table('shops') //店舗ID=1 の緯度経度を取出します。
+                    ->select('shops.latitude', 'shops.longitude')
+                    ->where('shops.id','=', $request->id)
+                    ->get(); 
+                } 
 
-        $shop1LatLng = $shop1_latlng->toArray();
+            $shop1LatLng = $shop1_latlng->toArray();
 
-        foreach ($shop1LatLng as $v) {
-                    $lat = $v->latitude;
-                    $lng = $v->longitude;
-        }
-  
-        return view('shop/store_uzumasa_1', //太秦店の緯度経度から地図を表示します。
-            
-            [         
-                'lat' => $lat,// 緯度latをbladeへ渡す
-                'lng' => $lng,// 経度lngをbladeへ渡す
-            ]);
-
-            } else {
-                return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
+            foreach ($shop1LatLng as $v) {
+                $lat = $v->latitude;
+                $lng = $v->longitude;
             }
-
-    } elseif ($request->id == 2) {//$request->idが2なら太秦店の地図を表示させる処理を実行します。
-
-        if (!empty($request->id)) {
-            if ($request->id == 2) {//祇園店の緯度経度をDBから取得します。
-                $shop2_latlng = DB::table('shops') //店舗ID=1 の緯度経度を取出します。
-                ->select('shops.latitude', 'shops.longitude')
-                ->where('shops.id','=', $request->id)
-                ->get(); 
-            } 
-   
-            $shop2LatLng = $shop2_latlng->toArray();
-
-            foreach ($shop2LatLng as $v) {
-                        $lat = $v->latitude;
-                        $lng = $v->longitude;
-            }
-
-            return view('shop/store_gion_1',//祇園店の緯度経度から地図を表示します。   
-                [ 
+    
+            return view('shop/store_uzumasa_1', //太秦店の緯度経度から地図を表示します。
+                
+                [         
                     'lat' => $lat,// 緯度latをbladeへ渡す
                     'lng' => $lng,// 経度lngをbladeへ渡す
                 ]);
 
-            } else {
-                return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
-            }
+                } else {
+                    return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
+                }
+
+        } elseif ($request->id == 2) {//$request->idが2なら太秦店の地図を表示させる処理を実行します。
+
+            if (!empty($request->id)) {
+                if ($request->id == 2) {//祇園店の緯度経度をDBから取得します。
+                    $shop2_latlng = DB::table('shops') //店舗ID=1 の緯度経度を取出します。
+                    ->select('shops.latitude', 'shops.longitude')
+                    ->where('shops.id','=', $request->id)
+                    ->get(); 
+                } 
+    
+                $shop2LatLng = $shop2_latlng->toArray();
+
+                foreach ($shop2LatLng as $v) {
+                            $lat = $v->latitude;
+                            $lng = $v->longitude;
+                }
+
+                return view('shop/store_gion_1',//祇園店の緯度経度から地図を表示します。   
+                    [ 
+                        'lat' => $lat,// 緯度latをbladeへ渡す
+                        'lng' => $lng,// 経度lngをbladeへ渡す
+                    ]);
+
+                } else {
+                    return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
+                }
         }    
 
     }

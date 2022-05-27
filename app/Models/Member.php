@@ -26,28 +26,28 @@ class Member extends Authenticatable
         'address5',
     ];
 
-        // みせたくない
-        protected $hidden = [
-            'password',
-        ];
+    // みせたくない
+    protected $hidden = [
+        'password',
+    ];
 
-        // リレーション
-        public function orders()
-        {
-            // Eloquentは、親モデル名に基づき、リレーションの外部キーを決定します。この場合、Orderモデルは
-            // 自動的にmember_id外部キーを持っているとみなします。
-            return $this->hasOne('Order::class');
-            // hasOneメソッドに渡される最初の引数は、関連するモデルクラスの名前です。関係を定義すると、
-            // Eloquentの動的プロパティを使用して関連レコードを取得できます。
-            // リレーションメソッドへアクセスできます。
-            // $order = Member::find(1)->order;
-        }
+    // リレーション
+    public function orders()
+    {
+        // Eloquentは、親モデル名に基づき、リレーションの外部キーを決定します。この場合、Orderモデルは
+        // 自動的にmember_id外部キーを持っているとみなします。
+        return $this->hasOne('Order::class');
+        // hasOneメソッドに渡される最初の引数は、関連するモデルクラスの名前です。関係を定義すると、
+        // Eloquentの動的プロパティを使用して関連レコードを取得できます。
+        // リレーションメソッドへアクセスできます。
+        // $order = Member::find(1)->order;
+    }
 
-        // Cartモデルとの一対多のリレーション
-        // Eloquentは親モデル（Memberモデル）の「スネークケース」名に「_id」という接尾辞を付けます。
-        // したがって、この例では、EloquentoはCartモデルの外部キーカラムが「member_id」であると想定します。       
-        public function carts()
-        {
-            return $this->hasMany(Cart::class);
-        }           
+    // Cartモデルとの一対多のリレーション
+    // Eloquentは親モデル（Memberモデル）の「スネークケース」名に「_id」という接尾辞を付けます。
+    // したがって、この例では、EloquentoはCartモデルの外部キーカラムが「member_id」であると想定します。       
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }           
 }

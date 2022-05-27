@@ -49,7 +49,5 @@ class Product extends Model
 
         return $getProductNameList;
     }
-
 }
-
  

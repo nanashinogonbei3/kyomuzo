@@ -45,32 +45,32 @@ class MemberController extends Controller
     public function confirm(Request $registration)
     {
         
-    // バリデーションを実行（結果に問題があれば処理を中断してエラーを返す
-    $registration->validate( [   
-        'last_name' => 'required',// 氏名
-        'first_name' => 'required',// 名前
-        'email' => 'required | email',// emailは、メールアドレス形式に。
-        'password' => 'required | min:8', 'regex:/^[!-~]+$/',// パスワードは英数字記号を混合パスワードは8桁以上で
-        'phone_number' => 'required | numeric','digits_between:10,11',// 電話番号は10桁または11桁になります
-        'postal_code' => 'required | min:8', 'regex',// 郵便番号
-        'address4' => 'required',// 郵便局APIを使用するため、都道府県、市区名、町名までのrequiredは全て不要 
-    ],
-    [   
-        'last_name.required' => '氏名を入力してください。',//氏名
-        'first_name.required' => 'お名前を入力してください。',// 名前
-        'email.required' => 'メールアドレスを入力してください。。',// メールアドレス
-        'email.email' => 'メールアドレス形式ではありません。',
-        'password.required' => 'パスワードを入力してください。',// パスワード
-        'password.min' => 'パスワードは8桁以上を入力してください。',
-        'password.regex' => 'パスワードは英数字記号を混合してください。',
-        'phone_number.required' => '電話番号を入力してください。',// 電話番号 
-        'phone_number.numeric' => '電話番号はハイフンなしで10桁から11桁で入力してください。',
-        'phone_number.digits_between' => '電話番号はハイフンなしで10桁から11桁で入力してください。',
-        'postal_code.required' => '郵便番号を入力してください。',// 郵便番号
-        'postal_code.min' => '郵便番号は8桁にしてください。',// 番地は―（ハイフン）を含めて８桁にしてください。
-        'postal_code.regex' => '郵便番号はハイフンを入れてください。',// 'postal_code.numeric' => '郵便番号はハイフンなしで7桁を入力してください。',
-        'address4.required' => '番地を入力してください。', // 番地を入力してください。       
-    ]);   
+        // バリデーションを実行（結果に問題があれば処理を中断してエラーを返す
+        $registration->validate( [   
+            'last_name' => 'required',// 氏名
+            'first_name' => 'required',// 名前
+            'email' => 'required | email',// emailは、メールアドレス形式に。
+            'password' => 'required | min:8', 'regex:/^[!-~]+$/',// パスワードは英数字記号を混合パスワードは8桁以上で
+            'phone_number' => 'required | numeric','digits_between:10,11',// 電話番号は10桁または11桁になります
+            'postal_code' => 'required | min:8', 'regex',// 郵便番号
+            'address4' => 'required',// 郵便局APIを使用するため、都道府県、市区名、町名までのrequiredは全て不要 
+        ],
+        [   
+            'last_name.required' => '氏名を入力してください。',//氏名
+            'first_name.required' => 'お名前を入力してください。',// 名前
+            'email.required' => 'メールアドレスを入力してください。。',// メールアドレス
+            'email.email' => 'メールアドレス形式ではありません。',
+            'password.required' => 'パスワードを入力してください。',// パスワード
+            'password.min' => 'パスワードは8桁以上を入力してください。',
+            'password.regex' => 'パスワードは英数字記号を混合してください。',
+            'phone_number.required' => '電話番号を入力してください。',// 電話番号 
+            'phone_number.numeric' => '電話番号はハイフンなしで10桁から11桁で入力してください。',
+            'phone_number.digits_between' => '電話番号はハイフンなしで10桁から11桁で入力してください。',
+            'postal_code.required' => '郵便番号を入力してください。',// 郵便番号
+            'postal_code.min' => '郵便番号は8桁にしてください。',// 番地は―（ハイフン）を含めて８桁にしてください。
+            'postal_code.regex' => '郵便番号はハイフンを入れてください。',// 'postal_code.numeric' => '郵便番号はハイフンなしで7桁を入力してください。',
+            'address4.required' => '番地を入力してください。', // 番地を入力してください。       
+        ]);   
         $input = $registration->all();// フォームから受け取った全ての値を取得し$inputに代入
         // バリデーション設定のない確認画面join_confirm.blade.phpで
         // デベロッパーツールを使って値を書き換えられないように
