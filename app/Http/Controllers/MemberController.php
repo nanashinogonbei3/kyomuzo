@@ -85,7 +85,6 @@ class MemberController extends Controller
         return view('shop/join_confirm', [
             'inputs' => $input,
         ]);
-
     }
 
 

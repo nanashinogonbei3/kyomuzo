@@ -20,11 +20,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        //
-        
-    }
+
 
     public function shop(Request $shop_id)
     {
@@ -35,8 +31,7 @@ class OrderController extends Controller
         
         $shop_id->session()->put('input', $input); //shop/orderで画面で選択した店舗IDをセッションに保存する
             
-        return view('shop/purchase'); //店舗idをセッションinputに保存したら、次の画面にリダイレクトする
-      
+        return view('shop/purchase'); //店舗idをセッションinputに保存したら、次の画面にリダイレクトする    
     }
 
 

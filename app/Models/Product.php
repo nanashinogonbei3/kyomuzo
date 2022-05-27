@@ -41,7 +41,6 @@ class Product extends Model
         return $product;
     }
     
-    
     //StockのDBを検索するためのリスト
     public function getProductList()
     {

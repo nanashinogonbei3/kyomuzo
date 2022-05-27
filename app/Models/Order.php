@@ -25,7 +25,6 @@ class Order extends Model
     {
         // memberに所属する注文テーブル
         return $this->belongsTo(Member::class);
-    
     }
 
     //規約により、Eloquentは親モデル（ここではOrderモデル）の「スネークケース」名に「_id」という接尾辞を
