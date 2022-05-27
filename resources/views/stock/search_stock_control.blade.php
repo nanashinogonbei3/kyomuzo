@@ -34,8 +34,8 @@
           <a href="/stock/stock_control">在庫</a>
         </li>
       </ul>
-     <!-- あいまい検索フォーム 工事中です。 -->
-      <form action="" method="get" class="d-flex">
+     <!-- あいまい検索フォーム -->
+     <form action="{{ route('random_search') }}" method="get" class="d-flex">
         @csrf
         <input type="text" name="input" value="{{$input}}" class="form-control me-2"  placeholder="Search" aria-label="Search">
         <button type="submit" value="find" class="btn btn-outline-success" >Search</button>
@@ -80,5 +80,4 @@
         </table>
       </div>
 </div>
-
 @endsection
