@@ -6,7 +6,7 @@
   <div>
     <a class="nav-link" href="{{ url('/shop/root_result') }}"><h5><dt>アクセス</dt></h5></a>
   </div>
-  <div id="map" style="width:700px; height: 500px"></div>
+  <div id="map" style="width:718px; height: 500px"></div>
   <script>
     // js/storesLocation.jsで使用する定数に、controllerでDBから取り出した緯度を$latに格納し、、js/storesLocation.jsに渡す
     const lat = "{{ $lat }}";
