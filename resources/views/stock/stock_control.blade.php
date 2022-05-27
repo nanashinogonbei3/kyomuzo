@@ -88,5 +88,4 @@
         </table>
       </div>
 </div>
-
 @endsection

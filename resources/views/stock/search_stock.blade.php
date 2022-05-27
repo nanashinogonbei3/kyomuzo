@@ -71,5 +71,4 @@
         </table>
  {{ $stocks->links() }} 
 </div>
-
 @endsection

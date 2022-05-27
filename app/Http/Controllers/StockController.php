@@ -194,7 +194,6 @@ class StockController extends Controller
 
             //ここから、検索するリスト一覧のデータを取得します。
 
-            //***
             //ここからは、日付ごとに検索した商品の検索結果を表示するためのリスト作成です。
             $dateTime = new DateTime(); 
         
@@ -228,13 +227,11 @@ class StockController extends Controller
             $dateTime->add(new DateInterval("P1D"));//+1日,P1D 1日を足します。Pはピリオド、’間隔’、Dは’日’を表す。’P1D’は’1日間隔’PHP公式マニュアル☞https://www.php.net/manual/ja/dateinterval.construct.php
         }
         
-    
             $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
 
             $getProductNameList = new Product; // しろあん・くろあんの商品のプルダウンリストから商品の在庫を絞り込みます。
             $productName_List = $getProductNameList->getProductList();
-
-            
+        
             $getShopNameList = New Shop; // 店舗のプルダウンリストから商品の在庫を絞り込みます。
             $shopName_List = $getShopNameList->getShopList();
 
@@ -409,7 +406,7 @@ class StockController extends Controller
                 'orders.id',//注文No.ごとにグループ化します。くろあん、黄みあんの複数注文をに1つにまとめます。
             )->orderBy('order_date', 'desc')->paginate(5);     
         
-            $getProductNameList = new Product; // しろあん・くろあん
+            $getProductNameList = new Product; // 黄みあん・くろあん
             $productName_List = $getProductNameList->getProductList();
     
             $getShopNameList = New Shop; // 店舗リスト

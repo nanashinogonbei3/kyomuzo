@@ -47,5 +47,4 @@
           <div><a href="{{ url('/stock/stock_list') }}" class="btn btn-light">戻る</a></div>
       </div>
 </div>
-
 @endsection

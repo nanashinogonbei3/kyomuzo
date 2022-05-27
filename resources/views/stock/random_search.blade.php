@@ -79,5 +79,4 @@
         {{ $items->links() }}
       </div>
 </div>
-
 @endsection
