@@ -15,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -28,12 +27,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ url('/shop/index') }}">ホーム</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/stock/stock_list') }}">製造商品リスト</a>
-                        </li>
-
+                        </li>      
                     </ul>
                 </div>
             </div>
@@ -41,7 +35,6 @@
         <!-- Navibar END -->
         <h1 class="site-heading text-center text-faded d-none d-lg-block">
             <!-- <span class="site-heading-upper text-primary mb-3">Which taste do you like?</span> -->
-
         </h1>
     </header>
     <!-- Navigation-->
@@ -73,8 +66,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
     </section>
     <footer class="footer text-faded text-center py-5">
         <div class="container">

@@ -2,14 +2,6 @@
 
 @section('content1')
 <!-- この中に地図を表示します・太秦店 -->
-<!-- <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Google Maps JavaScript API</title>
-
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
-      crossorigin="anonymous">
-  </head> -->
   <body onload="initialize()">
   <div class="card mb-3">
    <p>京都祇園店</p>
