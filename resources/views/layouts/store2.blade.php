@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -17,25 +16,20 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <!-- 日本語フォント sawarabi -->
     <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
-
 </head>
-
 <body>
     <header>
         <!-- Navibar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                
+            <div class="container-fluid">   
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ url('/shop/index') }}">ホーム</a>
-                        </li>
-                        
+                        </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/shop/registration') }}">会員登録</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/shop/index') }}">商品</a>
                         </li>
@@ -57,8 +51,6 @@
         </nav>
         <!-- Navibar END -->
         <h1 class="site-heading text-center text-faded d-none d-lg-block">
-    
-
         </h1>
     </header>
     <!-- Navigation-->
@@ -79,7 +71,6 @@
             </div>
         </div>
     </nav>
-
         <!-- 店舗B -->
         <section class="page-section cta">
             <div class="container">
@@ -100,8 +91,7 @@
                             <p class="address mb-5">
                                 <em>
                                     <strong>京都府京都市東山区祇園町北側</strong>
-                                    <br />
-                                    
+                                    <br />    
                                 </em>
                             </p>
                             <p class="mb-0">
@@ -114,10 +104,8 @@
                 </div>
             </div>
         </section>
-
-
         <footer class="footer text-faded text-center py-5">
-            <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2022</p></div>
+          <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2022</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

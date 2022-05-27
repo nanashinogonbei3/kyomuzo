@@ -24,8 +24,7 @@
     <header>
         <!-- Navibar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                
+            <div class="container-fluid">  
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -58,7 +57,6 @@
         <!-- Navibar END -->
         <h1 class="site-heading text-center text-faded d-none d-lg-block">
             <!-- <span class="site-heading-upper text-primary mb-3">Which taste do you like?</span> -->
-
         </h1>
     </header>
     <!-- Navigation-->
@@ -79,12 +77,9 @@
             </div>
         </div>
     </nav>
-
         <!-- 店舗A -->
         <section class="page-section cta">
             <div class="container">
-           
-            <!-- END shadow div -->
                 <div class="row">
                     <div class="col-xl-9 mx-auto">
                         <div class="cta-inner bg-faded text-center rounded">
@@ -102,8 +97,7 @@
                             <p class="address mb-5">
                                 <em>
                                     <strong>京都府京都市右京区太秦西蜂岡町９</strong>
-                                    <br />
-                                    
+                                    <br />       
                                 </em>
                             </p>
                             <p class="mb-0">
@@ -116,12 +110,8 @@
                 </div>
             </div>
         </section>
-        
-      
-
-
         <footer class="footer text-faded text-center py-5">
-            <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2022</p></div>
+          <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2022</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
