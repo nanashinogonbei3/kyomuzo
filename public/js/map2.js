@@ -11,7 +11,7 @@ function initialize() {
     // 地図のタイプ
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-
+console.log(latlng);
   // 全体地図の表示場所を、div id="map_canvas" に表示する。
   map = new google.maps.Map(document.getElementById("map_canvas"), opts);
 
