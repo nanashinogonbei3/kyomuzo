@@ -17,25 +17,21 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <!-- 日本語フォント sawarabi -->
     <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
-
 </head>
 
 <body>
     <header>
         <!-- Navibar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                
+            <div class="container-fluid"> 
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ url('/shop/index') }}">ホーム</a>
-                        </li>
-                        
+                        </li>      
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/shop/registration') }}">会員登録</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/shop/index') }}">商品</a>
                         </li>
@@ -58,7 +54,6 @@
         <!-- Navibar END -->
         <h1 class="site-heading text-center text-faded d-none d-lg-block">
             <!-- <span class="site-heading-upper text-primary mb-3">Which taste do you like?</span> -->
-
         </h1>
     </header>
     <!-- Navigation-->
@@ -79,7 +74,6 @@
             </div>
         </div>
     </nav>
-
         <!-- 店舗A -->
         <section class="page-section cta">
             <div class="container">
@@ -102,8 +96,7 @@
                             <p class="address mb-5">
                                 <em>
                                     <!-- <strong>京都府京都市右京区太秦西蜂岡町９</strong> -->
-                                    <br />
-                                    
+                                    <br />          
                                 </em>
                             </p>
                             <p class="mb-0">
@@ -116,16 +109,10 @@
                 </div>
             </div>
         </section>
-        
-      
-
-
         <footer class="footer text-faded text-center py-5">
             <div class="container"><p class="m-0 small">Copyright &copy; kyomuzo 2022</p></div>
         </footer>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>  
     </body>
 </html>
