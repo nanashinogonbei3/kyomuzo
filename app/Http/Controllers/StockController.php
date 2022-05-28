@@ -65,8 +65,7 @@ class StockController extends Controller
         $param = ['input' => $request->query('input'), 'stocks' => $stockPaginate, 'productName_List' => $productName_List, 'input' => $input,
         'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
-        return view('stock.stock_list', $param);
-            
+        return view('stock.stock_list', $param);        
     }
     
 
@@ -126,8 +125,8 @@ class StockController extends Controller
         $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
     
         return view('stock.stock_control', compact('orderQty','productName_List','shopName_List','input'));//stock_controlで店舗・商品別に在庫数を表示します。
-
     }
+
 
     public function findstockControl(Request $productId)//productIdでRequestを受け取るようにします。
     {
@@ -287,7 +286,6 @@ class StockController extends Controller
         'shopName_List' => $shopName_List]; //ブレードに送るため、inputのリクエスト、$itemの配列、商品リスト、店舗リストを$paramにまとめます。
 
         return view('stock/sales_history', $param);
-
     }
 
 
@@ -440,8 +438,8 @@ class StockController extends Controller
         $total = 0;
         foreach ($orders as $key => $v) {
         
-        // 自己代入 $x = $x + 1 => $x += 1 => 0 + 1 = 1 ,$x = 1, $x = $x + 1 => 1+1 = 2 -->   
-        $total += ($v['price'] * $v['order_quantity']); 
+            // 自己代入 $x = $x + 1 => $x += 1 => 0 + 1 = 1 ,$x = 1, $x = $x + 1 => 1+1 = 2 -->   
+            $total += ($v['price'] * $v['order_quantity']); 
 
         } 
             
@@ -481,7 +479,6 @@ class StockController extends Controller
             $input = ''; //あいまい検索 random_search.bladeへの検索結果を入力するテキスト入力フォームのname属性="input"。
 
             return view('stock.find_stock', compact('param', 'stocks', 'productName_List', 'shopName_List', 'input'));
-
         }
     }
 
