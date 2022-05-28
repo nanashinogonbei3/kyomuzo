@@ -77,7 +77,6 @@ class OrderController extends Controller
             } else { //カートが空でカートに入れるが押されたら同じ画面にまた戻ります。
             
                 return redirect('shop/purchase'); //再度、purchase.bladeに戻り、２種類商品が注文できるように同じ画面にリダイレクト/「注文を確定」でようやくconfirmへ
-
             }
         } // END IF
 
@@ -139,12 +138,12 @@ class OrderController extends Controller
             } // END IF
              
             if ($v['product_id'] == $request->product_id) { //リクエストされた$request_product_idがDBのproduct_idと一致したら更新処理をします。
-            DB::table('carts')
-                ->where('id' , $request->id)
-                ->update(
-                    ['product_id' => $form['product_id'], 'order_quantity' => $form['order_quantity'],
-                        'member_id' => $form['member_id']
-                    ]);
+                DB::table('carts')
+                    ->where('id' , $request->id)
+                    ->update(
+                        ['product_id' => $form['product_id'], 'order_quantity' => $form['order_quantity'],
+                            'member_id' => $form['member_id']
+                        ]);
             } // END IF
         } //END FOREACH 
   
@@ -201,7 +200,7 @@ class OrderController extends Controller
         // $today = $d->addDay()->format('Y-m-d');
         // $today = date("Y-m-d H:i:s")->format('y-m-d');
         if (empty(Auth::user()->id)) {
-                return redirect('shop/login');//もしログインIDが空ならログイン画面にリダイレクトします。
+            return redirect('shop/login');//もしログインIDが空ならログイン画面にリダイレクトします。
         } else {
             $memberId = Auth::user()->id; //・誰が メンバーid  現在ログイン中のメンバーのIDを受け取ります。
         
@@ -215,8 +214,7 @@ class OrderController extends Controller
             ];
             $request->session()->put('ordersValues', $ordersValues); //$ordersValuesをセッションに保存しておきます。
 
-            return redirect('shop/receiving'); //もう一度OrderControllerに戻ります。
-        
+            return redirect('shop/receiving'); //もう一度OrderControllerに戻ります。  
        }
     }
 
@@ -441,23 +439,23 @@ class OrderController extends Controller
                     ->get(); 
                 } 
 
-            $shop1LatLng = $shop1_latlng->toArray();
+                $shop1LatLng = $shop1_latlng->toArray();
 
-            foreach ($shop1LatLng as $v) {
-                $lat = $v->latitude;
-                $lng = $v->longitude;
-            }
-    
-            return view('shop/store_uzumasa_1', //太秦店の緯度経度から地図を表示します。
+                foreach ($shop1LatLng as $v) {
+                    $lat = $v->latitude;
+                    $lng = $v->longitude;
+                }
+        
+                return view('shop/store_uzumasa_1', //太秦店の緯度経度から地図を表示します。
                 
                 [         
                     'lat' => $lat,// 緯度latをbladeへ渡す
                     'lng' => $lng,// 経度lngをbladeへ渡す
                 ]);
 
-                } else {
-                    return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
-                }
+            } else {
+                return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
+            }
 
         } elseif ($request->id == 2) {//$request->idが2なら太秦店の地図を表示させる処理を実行します。
 
@@ -472,8 +470,8 @@ class OrderController extends Controller
                 $shop2LatLng = $shop2_latlng->toArray();
 
                 foreach ($shop2LatLng as $v) {
-                            $lat = $v->latitude;
-                            $lng = $v->longitude;
+                    $lat = $v->latitude;
+                    $lng = $v->longitude;
                 }
 
                 return view('shop/store_gion_1',//祇園店の緯度経度から地図を表示します。   
@@ -482,11 +480,10 @@ class OrderController extends Controller
                         'lng' => $lng,// 経度lngをbladeへ渡す
                     ]);
 
-                } else {
-                    return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
-                }
+            } else {
+                return redirect('/shop/stores');// $request->idがなく、いきなりshop/store_uzumasa_1に遷移した時は指定のページへリダイレクトさせます。
+            }
         }    
-
     }
 
 
