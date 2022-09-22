@@ -495,13 +495,13 @@ class OrderController extends Controller
         //取得した緯度経度をjsに渡して、スタート地点の変数に格納し、
         //ルートを地図上に表示します。
 
-        $lat = $request->lat;
-        $lng = $request->lng;
+        $lat = $request->lat;//getで受取った出発地点の緯度を取得
+        $lng = $request->lng;//getで受取った出発地点の経度を取得
     
         return view('shop/root_result', // 現在地緯度latをbladeへ渡す     
             [   
-                'lat' => $lat,// 現在地緯度latをbladeへ渡す 
-                'lng' => $lng,// 現在地経度lngをbladeへ渡す
+                'lat' => $lat,// 出発地点の緯度latをbladeへ渡す 
+                'lng' => $lng,// 出発地点の経度lngをbladeへ渡す
             ]);
     } 
 
