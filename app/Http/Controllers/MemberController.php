@@ -26,7 +26,7 @@ class MemberController extends Controller
         // クエリビルダ編 dd が効く
         $members = Member::orderBy('id', 'asc')
         ->Paginate(7);
- 
+
         return view('product.member', ['members' => $members]); 
 
     }
